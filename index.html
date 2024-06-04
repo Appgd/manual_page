@@ -71,20 +71,35 @@
 <ul>
 <li><a href="#fibercalc_fiber">fiber.calc_fiber</a>
 <ul>
-<li><a href="#%E5%90%84%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E">各引数の説明</a></li>
+<li><a href="#%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E">引数の説明</a></li>
 <li><a href="#%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80">出力ファイルの場所</a></li>
 <li><a href="#%E8%BF%94%E3%82%8A%E5%80%A4">返り値</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B">使用例</a></li>
 </ul>
 </li>
 <li><a href="#pmpycalc_gds">pmpy.calc_gds</a>
 <ul>
-<li><a href="#%E5%90%84%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E-1">各引数の説明</a></li>
+<li><a href="#%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E-1">引数の説明</a></li>
 <li><a href="#%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80-1">出力ファイルの場所</a></li>
 <li><a href="#%E8%BF%94%E3%82%8A%E5%80%A4-1">返り値</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B-1">使用例</a></li>
 </ul>
 </li>
-<li><a href="#fibercalc_rbend_gds">fiber.calc_rbend_gds</a></li>
-<li><a href="#fibergenerate_hashgene_dict">fiber.generate_hash(gene_dict)</a></li>
+<li><a href="#fibercalc_rbend_gds">fiber.calc_rbend_gds</a>
+<ul>
+<li><a href="#%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E-2">引数の説明</a></li>
+<li><a href="#%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80-2">出力ファイルの場所</a></li>
+<li><a href="#%E8%BF%94%E3%82%8A%E5%80%A4-2">返り値</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B-2">使用例</a></li>
+</ul>
+</li>
+<li><a href="#fibergenerate_hash">fiber.generate_hash</a>
+<ul>
+<li><a href="#%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E-3">引数の説明</a></li>
+<li><a href="#%E8%BF%94%E3%82%8A%E5%80%A4-3">返り値</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B-3">使用例</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -281,9 +296,11 @@ l0,-744c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 </ul>
 <h2 id="ライブラリの説明">ライブラリの説明 </h2>
 <h3 id="fibercalc_fiber">fiber.calc_fiber </h3>
-<p><code>result = calc_fiber(structure_dict, gif = False, pdf = False, couple = True, single = True, cij = True, kij = True, table = False)</code></p>
+<p><code>result = fiber.calc_fiber(structure_dict, gif = False, pdf = False, couple = True, single = True, cij = True, kij = True, table = True)</code></p>
 <p>ステップインデックス型光ファイバの断面解析を行い，結果を格納した辞書<code>result</code>を返します．また，新たに<code>data</code>ディレクトリを作成し，計算結果ファイルを出力します．</p>
-<h4 id="各引数の説明">各引数の説明 </h4>
+<h4 id="引数の説明">引数の説明 </h4>
+<ul>
+<li>
 <p><code>structure_dict</code>は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．</p>
 <pre data-role="codeBlock" data-info="python" class="language-python python"><code>structure_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
     <span class="token string">'num_of_core'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
@@ -300,6 +317,29 @@ l0,-744c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 <li><code>y_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
 <li><code>coredeltas</code>はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．</li>
 <li><code>wavelength[um]</code>は解析波長を表すfloat型のパラメータで，単位はμmです．</li>
+</ul>
+</li>
+<li>
+<p><code>gif = False</code>は光ファイバの断面解析をした際の電界分布をgif画像として保存するかを決定するパラメータです。<code>True</code>の場合は保存し、<code>False</code>の場合は保存しません。デフォルトでは保存しない設定となっています。</p>
+</li>
+<li>
+<p><code>pdf = False</code>は光ファイバの断面構造図をPDFとして保存するかを決定するパラメータです。<code>True</code>の場合は保存し、<code>False</code>の場合は保存しません。デフォルトでは保存しない設定となっています。</p>
+</li>
+<li>
+<p><code>couple = True</code>は、結合モードの解析を行うか決定するパラメータです。<code>True</code>の場合は解析し、<code>False</code>の場合は解析しません。デフォルトでは解析する設定となっています。</p>
+</li>
+<li>
+<p><code>single = True</code>は、個別コアモードの解析を行うか決定するパラメータです。<code>True</code>の場合は解析し、<code>False</code>の場合は解析しません。デフォルトでは解析する設定となっています。</p>
+</li>
+<li>
+<p><code>cij = True</code>は、突合せ結合係数の計算を行うか決定するパラメータです。<code>True</code>の場合は計算し、<code>False</code>の場合は計算しません。デフォルトでは計算する設定となっています。</p>
+</li>
+<li>
+<p><code>kij = True</code>は、結合係数の計算を行うか決定するパラメータです。<code>True</code>の場合は計算し、<code>False</code>の場合は計算しません。デフォルトでは計算する設定となっています。</p>
+</li>
+<li>
+<p><code>table = True</code></p>
+</li>
 </ul>
 <h4 id="出力ファイルの場所">出力ファイルの場所 </h4>
 <p><code>data</code>ディレクトリ内に構造ごとのディレクトリが作成され、出力データが格納されます。<br>
@@ -400,7 +440,8 @@ l0,-744c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 | |--tableng.dat
 </code></pre></details>
 <h4 id="返り値">返り値 </h4>
-<p><code>result = calc_fiber()</code>の返り値<code>result</code>は辞書となる。</p>
+<p><code>result = calc_fiber(structure_dict)</code>の返り値<code>result</code>は辞書となる。<br>
+同種2コアファイバの場合、次のような結果となる。</p>
 <pre data-role="codeBlock" data-info="python" class="language-python python"><code>result <span class="token operator">=</span> <span class="token punctuation">{</span>
     <span class="token string">'couple_ng1'</span><span class="token punctuation">:</span> <span class="token number">1.449856368659995</span><span class="token punctuation">,</span> 
     <span class="token string">'couple_ng2'</span><span class="token punctuation">:</span> <span class="token number">1.449966748736736</span><span class="token punctuation">,</span> 
@@ -444,10 +485,25 @@ c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
 <li><code>kappa{i}{j}</code>: コアi, j間の結合係数</li>
 <li><code>dirpath</code>: 解析データを格納する<code>data</code>ディレクトリ内のパス。ディレクトリ名はハッシュ値である。</li>
 </ul>
-<h3 id="pmpycalc_gds">pmpy.calc_gds </h3>
-<p><code>calc_gds(structure_dict, gds_params_dict, num_loop, num_cpu = 1, num_mem = 1, filename_dict = {}, prefilename = 'prefile', PManalysis_dirname = "PManalysis_sato_quad_new5_neff", output_dirname = 'gds_result', graph = False)</code><br>
-光ファイバの伝搬解析シミュレーションを行い、結果をファイルに出力します。関数自体の出力は<code>None</code>です。</p>
-<h4 id="各引数の説明-1">各引数の説明 </h4>
+<h4 id="使用例">使用例 </h4>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> fiber
+
+structure_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'num_of_core'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token string">'core_radius'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'x_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'y_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'coredeltas'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'wavelength[um]'</span><span class="token punctuation">:</span> <span class="token number">1.55</span>
+<span class="token punctuation">}</span>
+
+result <span class="token operator">=</span> fiber<span class="token punctuation">.</span>calc_fiber<span class="token punctuation">(</span>structure_dict<span class="token punctuation">,</span> gif <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span> pdf <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span> couple <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span> single <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span> cij <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span> kij <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span> table <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+</code></pre><h3 id="pmpycalc_gds">pmpy.calc_gds </h3>
+<p><code>pmpy.calc_gds(structure_dict, gds_params_dict, num_loop, num_cpu = 1, num_mem = 1, filename_dict = {}, prefilename = 'prefile', PManalysis_dirname = "PManalysis_sato_quad_new5_neff", output_dirname = 'gds_result', graph = False)</code><br>
+光ファイバの伝搬解析シミュレーションを行い、結果をファイルに出力します。関数自体の出力は<code>None</code>です。自作ライブラリの<code>pmpy</code>を使用しています。</p>
+<h4 id="引数の説明-1">引数の説明 </h4>
 <ul>
 <li>
 <p>structure_dict</p>
@@ -596,13 +652,121 @@ c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
 <ul>
 <li>伝搬計算の結果を格納しているディレクトリは次のようになっている。<br>
 <code>/data/構造特有のハッシュ値/wavelength_{波長}nm/gds_result/prefilename/TwistRate{ツイスト率}/pd{伝搬距離}_dz{セグメント長}_rbend{曲げ半径}_Lc{相関長}</code><br>
-例：<code>~/32ed8ee40e9fbbc510855d1a9ba715be6df6fb5252c6316d1b918c0a0c8abd2c/wavelength_1550nm/gds_result/_prefile_sato_quad_new5_neff_tr1.0_Lc0/TwistRate1.0/pd1000_dz0.001_rbend10000_Lc0</code></li>
+例：<code>/data/32ed8ee40e9fbbc510855d1a9ba715be6df6fb5252c6316d1b918c0a0c8abd2c/wavelength_1550nm/gds_result/_prefile_sato_quad_new5_neff_tr1.0_Lc0/TwistRate1.0/pd1000_dz0.001_rbend10000_Lc0</code></li>
 </ul>
 <h4 id="返り値-1">返り値 </h4>
 <p><code>calc_gds</code>の返り値は<code>None</code>である。計算した結果はすべてファイルに保存される。</p>
-<h3 id="fibercalc_rbend_gds">fiber.calc_rbend_gds </h3>
-<h3 id="fibergenerate_hashgene_dict">fiber.generate_hash(gene_dict) </h3>
-<p><a id="scroll-to-top" role="button" aria-label="scroll to top" onclick="scroll(0,0)" href=""><span class="icon"></span></a></p>
+<h4 id="使用例-1">使用例 </h4>
+<p>実行するディレクトリは、<code>/data/構造特有のハッシュ値/wavelength_{波長}nm</code>で実行する。例えば、<code>/data/32ed8ee40e9fbbc510855d1a9ba715be6df6fb5252c6316d1b918c0a0c8abd2c/wavelength_1550nm</code>で実行する。ただし、同一ディレクトリに以下のファイルがあることを確認する。</p>
+<ul>
+<li><code>tableU.dat</code></li>
+<li><code>tablekx.dat</code></li>
+<li><code>tableng.dat</code></li>
+</ul>
+<p>以下にコードの例を示す。</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> pmpy
+
+structure_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'num_of_core'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token string">'core_radius'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'x_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'y_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'coredeltas'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'wavelength[um]'</span><span class="token punctuation">:</span> <span class="token number">1.55</span>
+<span class="token punctuation">}</span>
+
+gds_params_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'distance[m]'</span><span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    <span class="token string">'dz[m]'</span><span class="token punctuation">:</span> <span class="token number">0.001</span><span class="token punctuation">,</span>
+    <span class="token string">'Rbend[mm]'</span><span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+    <span class="token string">'RandomBend(sigma)[/mm]'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">'TwistRate[rad/m](1.0:PI)'</span><span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span>
+    <span class="token string">'RandomTwist(sigma)[rad/m](1.0:PI)'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">'Lc[m]'</span><span class="token punctuation">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span>
+    <span class="token string">'loop'</span><span class="token punctuation">:</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword keyword-for">for</span> i <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>gds_params_dict<span class="token punctuation">[</span><span class="token string">'loop'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  pmpy<span class="token punctuation">.</span>calc_gds<span class="token punctuation">(</span>structure_dict<span class="token punctuation">,</span> gds_params_dict<span class="token punctuation">,</span> num_loop<span class="token punctuation">,</span> num_cpu <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">,</span> num_mem <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span>
+</code></pre><h3 id="fibercalc_rbend_gds">fiber.calc_rbend_gds </h3>
+<p><code>fiber.calc_rbend_gds(filename, gds_params, prefilename, PManalysis_dirname, output_dirname = 'gds_result', gds_params_dirname = 'gds_params', graph_only = False)</code><br>
+GDSの曲げ半径依存性を計算し、グラフを出力する関数です。自作ライブラリの<code>fiber</code>を使用しています。</p>
+<h4 id="引数の説明-2">引数の説明 </h4>
+<ul>
+<li>filename</li>
+<li>gds_params</li>
+<li>prefilename</li>
+<li>PManalysis_dirname</li>
+<li>output_dirname = 'gds_result'</li>
+<li>gds_params_dirname = 'gds_params'</li>
+<li>graph_only = False</li>
+</ul>
+<h4 id="出力ファイルの場所-2">出力ファイルの場所 </h4>
+<h4 id="返り値-2">返り値 </h4>
+<h4 id="使用例-2">使用例 </h4>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> fiber
+
+gds_params <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'distance[m]'</span><span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    <span class="token string">'dz[m]'</span><span class="token punctuation">:</span> <span class="token number">0.001</span><span class="token punctuation">,</span>
+    <span class="token string">'Rbend[mm]'</span><span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+    <span class="token string">'RandomBend(sigma)[/mm]'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">'TwistRate[rad/m](1.0:PI)'</span><span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span>
+    <span class="token string">'RandomTwist(sigma)[rad/m](1.0:PI)'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">'Lc[m]'</span><span class="token punctuation">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span>
+    <span class="token string">'loop'</span><span class="token punctuation">:</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+filename <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f'data/0/32ed8ee40e9fbbc510855d1a9ba715be6df6fb5252c6316d1b918c0a0c8abd2c/wavelength_1550nm'</span></span>
+output_dirname <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"gds_result_</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">int</span><span class="token punctuation">(</span>gds_params<span class="token punctuation">[</span><span class="token string">'distance[m]'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">m"</span></span>
+gds_params_dirname <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"gds_params_</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">int</span><span class="token punctuation">(</span>gds_params<span class="token punctuation">[</span><span class="token string">'distance[m]'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">m"</span></span>
+
+fiber<span class="token punctuation">.</span>calc_rbend_gds<span class="token punctuation">(</span>filename<span class="token punctuation">,</span> gds_params<span class="token punctuation">,</span> prefilename<span class="token punctuation">,</span> PManalysis_dirname<span class="token punctuation">,</span> output_dirname <span class="token operator">=</span> output_dirname<span class="token punctuation">,</span> gds_params_dirname <span class="token operator">=</span> gds_params_dirname<span class="token punctuation">,</span> graph_only <span class="token operator">=</span> graph_only<span class="token punctuation">)</span>
+</code></pre><h3 id="fibergenerate_hash">fiber.generate_hash </h3>
+<p><code>fiber.generate_hash(structure_dict)</code><br>
+入力された辞書型のデータに対して、ハッシュ値を求めて文字列<code>str</code>として返す関数。入力データは、光ファイバの構造を格納した辞書である。自作ライブラリ<code>fiber</code>を使用。</p>
+<h4 id="引数の説明-3">引数の説明 </h4>
+<ul>
+<li><code>structure_dict</code>は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．</li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>structure_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'num_of_core'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token string">'core_radius'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'x_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'y_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'coredeltas'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'wavelength[um]'</span><span class="token punctuation">:</span> <span class="token number">1.55</span>
+<span class="token punctuation">}</span>
+</code></pre><ul>
+<li><code>num_of_core</code>はコア数を表す整数型 (int) 型のパラメータです．</li>
+<li><code>core_radius</code>はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>x_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>y_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>coredeltas</code>はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．</li>
+<li><code>wavelength[um]</code>は解析波長を表すfloat型のパラメータで，単位はμmです．</li>
+</ul>
+<h4 id="返り値-3">返り値 </h4>
+<ul>
+<li><code>hashed_str = generate_hash(structure_dict)</code>の返り値は、構造ごとに割り当てられた文字列である。入力に、同一構造のデータ<code>structure_dict</code>を入力すると、同じ出力が得られる。</li>
+<li>ハッシュ化のアルゴリズムにはSHA256を使用している。<code>hashed_string = hashlib.sha256(input_string.encode()).hexdigest()</code></li>
+</ul>
+<h4 id="使用例-3">使用例 </h4>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> fiber
+
+structure_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'num_of_core'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token string">'core_radius'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'x_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'y_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'coredeltas'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'wavelength[um]'</span><span class="token punctuation">:</span> <span class="token number">1.55</span>
+<span class="token punctuation">}</span>
+
+hashed_str <span class="token operator">=</span> fiber<span class="token punctuation">.</span>generate_hash<span class="token punctuation">(</span>structure_dict<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>hashed_str<span class="token punctuation">)</span>
+</code></pre><p><a id="scroll-to-top" role="button" aria-label="scroll to top" onclick="scroll(0,0)" href=""><span class="icon"></span></a></p>
 <link rel="stylesheet" type="text/css" href="inproduct_releasenotes.css">
 
       </div>
