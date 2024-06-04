@@ -1,205 +1,123 @@
-<!DOCTYPE html><html><head>
-      <title>manual</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-      
-      
-      
-      
-      
-      <style>
-      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
-/* Please visit the URL below for more information: */
-/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+# ファイバ計算Pythonライブラリマニュアル
 
-      </style>
-      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    // your code here
-  });
-</script></head><body for="html-export">
-    
-    
-      <div class="crossnote markdown-preview  ">
-      
-<h1 id="ファイバ計算pythonライブラリマニュアル">ファイバ計算Pythonライブラリマニュアル </h1>
-<ul>
-<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E8%A8%88%E7%AE%97python%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB">ファイバ計算Pythonライブラリマニュアル</a></li>
-<li><a href="#"></a>
-<ul>
-<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E8%A8%88%E7%AE%97%E7%94%A8python%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">ファイバ計算用Pythonライブラリ</a>
-<ul>
-<li><a href="#%E6%96%AD%E9%9D%A2%E8%A7%A3%E6%9E%90">断面解析</a>
-<ul>
-<li><a href="#%E6%A7%8B%E9%80%A0%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8Blps%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">構造を決めるlpsファイルの書き方</a>
-<ul>
-<li><a href="#%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%81%82%E3%82%8Bcfg%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">有限要素法の設定ファイルであるcfgファイルの書き方</a></li>
-</ul>
-</li>
-<li><a href="#2%E6%AC%A1%E5%85%83%E3%82%B9%E3%82%AB%E3%83%A9%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">2次元スカラ有限要素法に必要なファイル</a>
-<ul>
-<li><a href="#ncoremsh-ncorecfg">Ncore.msh, Ncore.cfg</a></li>
-</ul>
-</li>
-<li><a href="#%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">有限要素法の実行ファイル</a>
-<ul>
-<li><a href="#solvernew_2d_sfem_20210604bsfem-ncore"><code>Solver/new_2D_SFEM_20210604b/sfem {N}core</code></a></li>
-</ul>
-</li>
-<li><a href="#%E7%B5%90%E5%90%88%E4%BF%82%E6%95%B0kappa%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">結合係数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace linebreak="newline"></mspace><mi>k</mi><mi>a</mi><mi>p</mi><mi>p</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">\\kappa</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ka</span><span class="mord mathnormal">pp</span><span class="mord mathnormal">a</span></span></span></span>の実行ファイル</a>
-<ul>
-<li><a href="#solvernew_2d_sfem_overlapsfem_overlap-singlenncore-couplencore"><code>Solver/new_2D_SFEM_overlap/sfem_overlap single{N}/{N}core couple/{N}core</code></a></li>
-</ul>
-</li>
-<li><a href="#%E7%AA%81%E3%81%8D%E5%90%88%E3%82%8F%E3%81%9B%E7%B5%90%E5%90%88%E4%BF%82%E6%95%B0c_ij%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B9">突き合わせ結合係数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi mathvariant="normal">_</mi><mrow><mi>i</mi><mi>j</mi></mrow></mrow><annotation encoding="application/x-tex">c\_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9695em;vertical-align:-0.31em;"></span><span class="mord mathnormal">c</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05724em;">ij</span></span></span></span></span>の求め方</a>
-<ul>
-<li><a href="#solvernew_2d_sfem_overlap_kappasfem_overlap-singleincore-singlejncore-couplencore"><code>Solver/new_2D_SFEM_overlap_kappa/sfem_overlap single{i}/{N}core single{j}/{N}core couple/{N}core</code></a></li>
-</ul>
-</li>
-<li><a href="#%E4%BC%9D%E6%90%AC%E8%A1%8C%E5%88%97m%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B91">伝搬行列Mの求め方1</a></li>
-<li><a href="#%E5%9F%BA%E5%BA%95%E5%A4%89%E6%8F%9B%E8%A1%8C%E5%88%97p%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B9">基底変換行列Pの求め方</a></li>
-<li><a href="#%E4%BC%9D%E6%90%AC%E8%A1%8C%E5%88%97m%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B92">伝搬行列Mの求め方2</a></li>
-<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E7%94%A8c%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9">伝搬解析用C++プログラムの使い方</a>
-<ul>
-<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88mpiexecsh">伝搬解析を実行するシェルスクリプト<code>mpiexec.sh</code></a></li>
-<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%82%92%E8%A1%8C%E3%81%86%E8%A8%88%E7%AE%97%E6%A9%9F%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABhostfile">伝搬解析を行う計算機を指定する設定ファイル<code>hostfile</code></a></li>
-<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%81%AE%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%92%E8%A8%98%E8%BF%B0%E3%81%97%E3%81%9F%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABparamini">伝搬解析のパラメータを記述した設定ファイル<code>param.ini</code></a></li>
-<li><a href="#%E5%9F%BA%E5%BA%95%E5%A4%89%E6%8F%9B%E8%A1%8C%E5%88%97%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtableudat">基底変換行列を格納したファイル<code>tableU.dat</code></a></li>
-<li><a href="#%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%A2%E3%83%BC%E3%83%89%E3%81%AE%E4%BC%9D%E6%90%AC%E5%AE%9A%E6%95%B0%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtablekxdat">スーパーモードの伝搬定数を格納したファイル<code>tablekx.dat</code></a></li>
-<li><a href="#%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%A2%E3%83%BC%E3%83%89%E3%81%AE%E7%BE%A4%E5%B1%88%E6%8A%98%E7%8E%87%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtablengdat">スーパーモードの群屈折率を格納したファイル<code>tableng.dat</code></a></li>
-</ul>
-</li>
-<li><a href="#%E5%88%86%E6%95%A3%E6%9B%B2%E7%B7%9A%E3%81%A8%E3%83%A2%E3%83%BC%E3%83%89%E6%95%B0">分散曲線とモード数</a></li>
-<li><a href="#%E4%B8%A6%E5%88%97%E8%A8%88%E7%AE%97%E3%81%AE%E6%96%B9%E6%B3%95">並列計算の方法</a></li>
-<li><a href="#%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E3%82%B0%E3%83%A9%E3%83%95%E3%81%AE%E6%8F%8F%E7%94%BB%E6%96%B9%E6%B3%95">よくあるグラフの描画方法</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E8%AA%AC%E6%98%8E">ライブラリの説明</a>
-<ul>
-<li><a href="#fibercalc_fiber">fiber.calc_fiber</a>
-<ul>
-<li><a href="#%E5%90%84%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E">各引数の説明</a></li>
-<li><a href="#%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80">出力ファイルの場所</a></li>
-<li><a href="#calc_fiber%E3%81%AE%E8%BF%94%E3%82%8A%E5%80%A4">calc_fiberの返り値</a></li>
-</ul>
-</li>
-<li><a href="#pmpycalc_gds">pmpy.calc_gds</a></li>
-<li><a href="#fibercalc_rbend_gds">fiber.calc_rbend_gds</a></li>
-<li><a href="#fibergenerate_hashgene_dict">fiber.generate_hash(gene_dict)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1></h1>
-<h2 id="ファイバ計算用pythonライブラリ">ファイバ計算用Pythonライブラリ </h2>
-<h3 id="断面解析">断面解析 </h3>
-<h4 id="構造を決めるlpsファイルの書き方">構造を決めるlpsファイルの書き方 </h4>
-<h5 id="有限要素法の設定ファイルであるcfgファイルの書き方">有限要素法の設定ファイルであるcfgファイルの書き方 </h5>
-<h4 id="2次元スカラ有限要素法に必要なファイル">2次元スカラ有限要素法に必要なファイル </h4>
-<h5 id="ncoremsh-ncorecfg">Ncore.msh, Ncore.cfg </h5>
-<h4 id="有限要素法の実行ファイル">有限要素法の実行ファイル </h4>
-<h5 id="solvernew_2d_sfem_20210604bsfem-ncore"><code>Solver/new_2D_SFEM_20210604b/sfem {N}core</code> </h5>
-<h4 id="結合係数kappaの実行ファイル">結合係数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">κ</span></span></span></span>の実行ファイル </h4>
-<h5 id="solvernew_2d_sfem_overlapsfem_overlap-singlenncore-couplencore"><code>Solver/new_2D_SFEM_overlap/sfem_overlap single{N}/{N}core couple/{N}core</code> </h5>
-<h4 id="突き合わせ結合係数c_ijの求め方">突き合わせ結合係数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">c_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>の求め方 </h4>
-<h5 id="solvernew_2d_sfem_overlap_kappasfem_overlap-singleincore-singlejncore-couplencore"><code>Solver/new_2D_SFEM_overlap_kappa/sfem_overlap single{i}/{N}core single{j}/{N}core couple/{N}core</code> </h5>
-<h4 id="伝搬行列mの求め方1">伝搬行列Mの求め方1 </h4>
-<p>有限要素法から計算した、個別コアモードの伝搬定数と、結合係数から次式の行列Mを構成する。<br>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>M</mi><mo>=</mo><mrow><mo fence="true">(</mo><mtable rowspacing="0.16em" columnalign="center center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>β</mi><mn>1</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>κ</mi><mn>12</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋯</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>κ</mi><mrow><mn>1</mn><mi>n</mi></mrow></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>κ</mi><mn>21</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>β</mi><mn>2</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋯</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>κ</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi><mi mathvariant="normal">⋮</mi><mpadded height="0em" voffset="0em"><mspace mathbackground="black" width="0em" height="1.5em"></mspace></mpadded></mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi><mi mathvariant="normal">⋮</mi><mpadded height="0em" voffset="0em"><mspace mathbackground="black" width="0em" height="1.5em"></mspace></mpadded></mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋯</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋱</mo></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>κ</mi><mrow><mi>n</mi><mn>1</mn></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>κ</mi><mrow><mi>n</mi><mn>2</mn></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋯</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>β</mi><mi>n</mi></msub></mstyle></mtd></mtr></mtable><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">M = 
+- [ファイバ計算Pythonライブラリマニュアル](#ファイバ計算pythonライブラリマニュアル)
+- [](#)
+  - [ファイバ計算用Pythonライブラリ](#ファイバ計算用pythonライブラリ)
+    - [断面解析](#断面解析)
+      - [構造を決めるlpsファイルの書き方](#構造を決めるlpsファイルの書き方)
+      - [有限要素法の設定ファイルであるcfgファイルの書き方](#有限要素法の設定ファイルであるcfgファイルの書き方)
+      - [2次元スカラ有限要素法に必要なファイル](#2次元スカラ有限要素法に必要なファイル)
+      - [有限要素法の実行ファイル](#有限要素法の実行ファイル)
+      - [結合係数の実行ファイル](#結合係数の実行ファイル)
+      - [突き合わせ結合係数の実行ファイル](#突き合わせ結合係数の実行ファイル)
+    - [伝搬解析](#伝搬解析)
+      - [伝搬行列Mの求め方1](#伝搬行列mの求め方1)
+      - [基底変換行列Pの求め方](#基底変換行列pの求め方)
+      - [伝搬行列Mの求め方2](#伝搬行列mの求め方2)
+      - [伝搬解析用C++プログラムの使い方](#伝搬解析用cプログラムの使い方)
+        - [伝搬解析を実行するシェルスクリプト`mpiexec.sh`](#伝搬解析を実行するシェルスクリプトmpiexecsh)
+        - [伝搬解析を行う計算機を指定する設定ファイル`hostfile`](#伝搬解析を行う計算機を指定する設定ファイルhostfile)
+        - [伝搬解析のパラメータを記述した設定ファイル`param.ini`](#伝搬解析のパラメータを記述した設定ファイルparamini)
+        - [基底変換行列を格納したファイル`tableU.dat`](#基底変換行列を格納したファイルtableudat)
+        - [スーパーモードの伝搬定数を格納したファイル`tablekx.dat`](#スーパーモードの伝搬定数を格納したファイルtablekxdat)
+        - [スーパーモードの群屈折率を格納したファイル`tableng.dat`](#スーパーモードの群屈折率を格納したファイルtablengdat)
+    - [Tips](#tips)
+      - [分散曲線とモード数](#分散曲線とモード数)
+      - [並列計算の方法](#並列計算の方法)
+      - [よくあるグラフの描画方法](#よくあるグラフの描画方法)
+  - [ライブラリの説明](#ライブラリの説明)
+    - [fiber.calc\_fiber](#fibercalc_fiber)
+      - [各引数の説明](#各引数の説明)
+      - [出力ファイルの場所](#出力ファイルの場所)
+      - [返り値](#返り値)
+    - [pmpy.calc\_gds](#pmpycalc_gds)
+      - [各引数の説明](#各引数の説明-1)
+      - [出力ファイルの場所](#出力ファイルの場所-1)
+      - [返り値](#返り値-1)
+    - [fiber.calc\_rbend\_gds](#fibercalc_rbend_gds)
+    - [fiber.generate\_hash(gene\_dict)](#fibergenerate_hashgene_dict)
+
+#
+## ファイバ計算用Pythonライブラリ
+### 断面解析
+#### 構造を決めるlpsファイルの書き方
+#### 有限要素法の設定ファイルであるcfgファイルの書き方
+#### 2次元スカラ有限要素法に必要なファイル
+- Ncore.msh, Ncore.cfg
+#### 有限要素法の実行ファイル
+- `Solver/new_2D_SFEM_20210604b/sfem {N}core`
+#### 結合係数の実行ファイル
+- `Solver/new_2D_SFEM_overlap/sfem_overlap single{N}/{N}core couple/{N}core`
+#### 突き合わせ結合係数の実行ファイル
+- `Solver/new_2D_SFEM_overlap_kappa/sfem_overlap single{i}/{N}core single{j}/{N}core couple/{N}core`
+
+### 伝搬解析
+#### 伝搬行列Mの求め方1
+有限要素法から計算した、個別コアモードの伝搬定数と、結合係数から次式の行列Mを構成する。
+$$
+M = 
 \begin{pmatrix}
-\beta_1 &amp; \kappa_{12} &amp; \cdots &amp; \kappa_{1n}\\
-\kappa_{21} &amp; \beta_2 &amp; \cdots &amp; \kappa_{2n}\\
-\vdots &amp; \vdots &amp; \cdots &amp; \ddots\\
-\kappa_{n1} &amp; \kappa_{n2} &amp; \cdots &amp; \beta_n\\
-\end{pmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:5.46em;vertical-align:-2.48em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.95em;"><span style="top:-4.95em;"><span class="pstrut" style="height:7.4em;"></span><span style="width:0.875em;height:5.400em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="5.400em" viewBox="0 0 875 5400"><path d="M863,9c0,-2,-2,-5,-6,-9c0,0,-17,0,-17,0c-12.7,0,-19.3,0.3,-20,1
-c-5.3,5.3,-10.3,11,-15,17c-242.7,294.7,-395.3,682,-458,1162c-21.3,163.3,-33.3,349,
--36,557 l0,1884c0.2,6,0,26,0,60c2,159.3,10,310.7,24,454c53.3,528,210,
-949.7,470,1265c4.7,6,9.7,11.7,15,17c0.7,0.7,7,1,19,1c0,0,18,0,18,0c4,-4,6,-7,6,-9
-c0,-2.7,-3.3,-8.7,-10,-18c-135.3,-192.7,-235.5,-414.3,-300.5,-665c-65,-250.7,-102.5,
--544.7,-112.5,-882c-2,-104,-3,-167,-3,-189
-l0,-1892c0,-162.7,5.7,-314,17,-454c20.7,-272,63.7,-513,129,-723c65.3,
--210,155.3,-396.3,270,-559c6.7,-9.3,10,-15.3,10,-18z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.45em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.98em;"><span style="top:-5.8275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-4.6275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">κ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">21</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.7675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span><span style="top:-1.5675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">κ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.48em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.98em;"><span style="top:-5.8275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">κ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-4.6275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.7675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span><span style="top:-1.5675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">κ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.48em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.98em;"><span style="top:-5.64em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋯</span></span></span><span style="top:-4.44em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋯</span></span></span><span style="top:-2.58em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋯</span></span></span><span style="top:-1.38em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋯</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.48em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.98em;"><span style="top:-5.64em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">κ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-4.44em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">κ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.58em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋱</span></span></span><span style="top:-1.38em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.48em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.95em;"><span style="top:-4.95em;"><span class="pstrut" style="height:7.4em;"></span><span style="width:0.875em;height:5.400em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="5.400em" viewBox="0 0 875 5400"><path d="M76,0c-16.7,0,-25,3,-25,9c0,2,2,6.3,6,13c21.3,28.7,42.3,60.3,
-63,95c96.7,156.7,172.8,332.5,228.5,527.5c55.7,195,92.8,416.5,111.5,664.5
-c11.3,139.3,17,290.7,17,454c0,28,1.7,43,3.3,45l0,1809
-c-3,4,-3.3,16.7,-3.3,38c0,162,-5.7,313.7,-17,455c-18.7,248,-55.8,469.3,-111.5,664
-c-55.7,194.7,-131.8,370.3,-228.5,527c-20.7,34.7,-41.7,66.3,-63,95c-2,3.3,-4,7,-6,11
-c0,7.3,5.7,11,17,11c0,0,11,0,11,0c9.3,0,14.3,-0.3,15,-1c5.3,-5.3,10.3,-11,15,-17
-c242.7,-294.7,395.3,-681.7,458,-1161c21.3,-164.7,33.3,-350.7,36,-558
-l0,-1944c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
--470,-1265c-4.7,-6,-9.7,-11.7,-15,-17c-0.7,-0.7,-6.7,-1,-18,-1z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.45em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
-<h4 id="基底変換行列pの求め方">基底変換行列Pの求め方 </h4>
-<p>行列Mを特異値分解すると次式となる。<br>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>M</mi><mo>=</mo><mi>P</mi><mi>D</mi><msup><mi>P</mi><mo lspace="0em" rspace="0em">†</mo></msup><mspace linebreak="newline"></mspace><mi>P</mi><mo>=</mo><mrow><mo fence="true">(</mo><mtable rowspacing="0.16em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>c</mi><mn>11</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋯</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>c</mi><mrow><mn>1</mn><mi>n</mi></mrow></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi><mi mathvariant="normal">⋮</mi><mpadded height="0em" voffset="0em"><mspace mathbackground="black" width="0em" height="1.5em"></mspace></mpadded></mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋱</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi><mi mathvariant="normal">⋮</mi><mpadded height="0em" voffset="0em"><mspace mathbackground="black" width="0em" height="1.5em"></mspace></mpadded></mi></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>c</mi><mrow><mi>n</mi><mn>1</mn></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋯</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>c</mi><mrow><mi>n</mi><mi>n</mi></mrow></msub></mstyle></mtd></mtr></mtable><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>D</mi><mo>=</mo><mrow><mo fence="true">(</mo><mtable rowspacing="0.16em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>β</mi><mo>~</mo></mover><mn>1</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi>O</mi></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋱</mo></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi>O</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>β</mi><mo>~</mo></mover><mi>n</mi></msub></mstyle></mtd></mtr></mtable><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">M = PDP^{\dagger}\\
+\beta_1 & \kappa_{12} & \cdots & \kappa_{1n}\\
+\kappa_{21} & \beta_2 & \cdots & \kappa_{2n}\\
+\vdots & \vdots & \cdots & \ddots\\
+\kappa_{n1} & \kappa_{n2} & \cdots & \beta_n\\
+\end{pmatrix}
+$$ 
+#### 基底変換行列Pの求め方
+行列Mを特異値分解すると次式となる。
+$$
+M = PDP^{\dagger}\\
 P = \begin{pmatrix}
-c_{11} &amp; \cdots &amp; c_{1n}\\
-\vdots &amp; \ddots &amp; \vdots\\
-c_{n1} &amp; \cdots &amp; c_{nn}
+c_{11} & \cdots & c_{1n}\\
+\vdots & \ddots & \vdots\\
+c_{n1} & \cdots & c_{nn}
 \end{pmatrix}, 
 D = \begin{pmatrix}
-\tilde\beta_1 &amp;   &amp; O\\
-  &amp; \ddots &amp;  \\
-O &amp;  &amp;  \tilde\beta_n\\
-\end{pmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8991em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:4.26em;vertical-align:-1.88em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35em;"><span style="top:-4.35em;"><span class="pstrut" style="height:6.2em;"></span><span style="width:0.875em;height:4.200em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="4.200em" viewBox="0 0 875 4200"><path d="M863,9c0,-2,-2,-5,-6,-9c0,0,-17,0,-17,0c-12.7,0,-19.3,0.3,-20,1
-c-5.3,5.3,-10.3,11,-15,17c-242.7,294.7,-395.3,682,-458,1162c-21.3,163.3,-33.3,349,
--36,557 l0,684c0.2,6,0,26,0,60c2,159.3,10,310.7,24,454c53.3,528,210,
-949.7,470,1265c4.7,6,9.7,11.7,15,17c0.7,0.7,7,1,19,1c0,0,18,0,18,0c4,-4,6,-7,6,-9
-c0,-2.7,-3.3,-8.7,-10,-18c-135.3,-192.7,-235.5,-414.3,-300.5,-665c-65,-250.7,-102.5,
--544.7,-112.5,-882c-2,-104,-3,-167,-3,-189
-l0,-692c0,-162.7,5.7,-314,17,-454c20.7,-272,63.7,-513,129,-723c65.3,
--210,155.3,-396.3,270,-559c6.7,-9.3,10,-15.3,10,-18z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.85em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.38em;"><span style="top:-5.2275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">11</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.3675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span><span style="top:-2.1675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.88em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.38em;"><span style="top:-5.04em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋯</span></span></span><span style="top:-3.18em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋱</span></span></span><span style="top:-1.98em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋯</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.88em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.38em;"><span style="top:-5.2275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.3675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span><span style="top:-2.1675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">nn</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.88em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35em;"><span style="top:-4.35em;"><span class="pstrut" style="height:6.2em;"></span><span style="width:0.875em;height:4.200em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="4.200em" viewBox="0 0 875 4200"><path d="M76,0c-16.7,0,-25,3,-25,9c0,2,2,6.3,6,13c21.3,28.7,42.3,60.3,
-63,95c96.7,156.7,172.8,332.5,228.5,527.5c55.7,195,92.8,416.5,111.5,664.5
-c11.3,139.3,17,290.7,17,454c0,28,1.7,43,3.3,45l0,609
-c-3,4,-3.3,16.7,-3.3,38c0,162,-5.7,313.7,-17,455c-18.7,248,-55.8,469.3,-111.5,664
-c-55.7,194.7,-131.8,370.3,-228.5,527c-20.7,34.7,-41.7,66.3,-63,95c-2,3.3,-4,7,-6,11
-c0,7.3,5.7,11,17,11c0,0,11,0,11,0c9.3,0,14.3,-0.3,15,-1c5.3,-5.3,10.3,-11,15,-17
-c242.7,-294.7,395.3,-681.7,458,-1161c21.3,-164.7,33.3,-350.7,36,-558
-l0,-744c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
--470,-1265c-4.7,-6,-9.7,-11.7,-15,-17c-0.7,-0.7,-6.7,-1,-18,-1z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.85em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.7826em;vertical-align:-1.6413em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.875em;height:3.600em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="3.600em" viewBox="0 0 875 3600"><path d="M863,9c0,-2,-2,-5,-6,-9c0,0,-17,0,-17,0c-12.7,0,-19.3,0.3,-20,1
-c-5.3,5.3,-10.3,11,-15,17c-242.7,294.7,-395.3,682,-458,1162c-21.3,163.3,-33.3,349,
--36,557 l0,84c0.2,6,0,26,0,60c2,159.3,10,310.7,24,454c53.3,528,210,
-949.7,470,1265c4.7,6,9.7,11.7,15,17c0.7,0.7,7,1,19,1c0,0,18,0,18,0c4,-4,6,-7,6,-9
-c0,-2.7,-3.3,-8.7,-10,-18c-135.3,-192.7,-235.5,-414.3,-300.5,-665c-65,-250.7,-102.5,
--544.7,-112.5,-882c-2,-104,-3,-167,-3,-189
-l0,-92c0,-162.7,5.7,-314,17,-454c20.7,-272,63.7,-513,129,-723c65.3,
--210,155.3,-396.3,270,-559c6.7,-9.3,10,-15.3,10,-18z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.1413em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9313em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span><span style="top:-3.6134em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">~</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.7187em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">O</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.6413em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.1413em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="minner">⋱</span></span></span><span style="top:-1.7187em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.6413em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.1413em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">O</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.7187em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9313em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span><span style="top:-3.6134em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">~</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.6413em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.875em;height:3.600em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="3.600em" viewBox="0 0 875 3600"><path d="M76,0c-16.7,0,-25,3,-25,9c0,2,2,6.3,6,13c21.3,28.7,42.3,60.3,
-63,95c96.7,156.7,172.8,332.5,228.5,527.5c55.7,195,92.8,416.5,111.5,664.5
-c11.3,139.3,17,290.7,17,454c0,28,1.7,43,3.3,45l0,9
-c-3,4,-3.3,16.7,-3.3,38c0,162,-5.7,313.7,-17,455c-18.7,248,-55.8,469.3,-111.5,664
-c-55.7,194.7,-131.8,370.3,-228.5,527c-20.7,34.7,-41.7,66.3,-63,95c-2,3.3,-4,7,-6,11
-c0,7.3,5.7,11,17,11c0,0,11,0,11,0c9.3,0,14.3,-0.3,15,-1c5.3,-5.3,10.3,-11,15,-17
-c242.7,-294.7,395.3,-681.7,458,-1161c21.3,-164.7,33.3,-350.7,36,-558
-l0,-144c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
--470,-1265c-4.7,-6,-9.7,-11.7,-15,-17c-0.7,-0.7,-6.7,-1,-18,-1z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span></span></span></span></span><br>
-<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>†</mo></mrow><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">†</span></span></span></span>は共役複素転置を表す。このとき、Pが基底変換行列、Dが固有値行列となる。Dは対角成分のみを持つ行列で、その要素はスーパーモードの伝搬定数となる。</p>
-<h4 id="伝搬行列mの求め方2">伝搬行列Mの求め方2 </h4>
-<p>基底変換行列と固有値行列がわかれば、結合係数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">κ</span></span></span></span>を求めずに、突合せ結合係数とスーパーモードの伝搬定数のみからモード結合方程式の行列Mを構成できる。</p>
-<h4 id="伝搬解析用cプログラムの使い方">伝搬解析用C++プログラムの使い方 </h4>
-<h5 id="伝搬解析を実行するシェルスクリプトmpiexecsh">伝搬解析を実行するシェルスクリプト<code>mpiexec.sh</code> </h5>
-<pre data-role="codeBlock" data-info="sh" class="language-bash sh"><code><span class="token shebang important">#!/bin/sh</span>
-mpirun <span class="token parameter variable">-n</span> <span class="token punctuation">{</span>num_proc<span class="token punctuation">}</span> <span class="token parameter variable">-ppn</span> <span class="token punctuation">{</span>num_procpernode<span class="token punctuation">}</span> <span class="token parameter variable">-f</span> hostfile <span class="token punctuation">{</span>path_to_lib<span class="token punctuation">}</span>/Solver/<span class="token punctuation">{</span>PManalysis_dirname<span class="token punctuation">}</span>/PManalysis_new param.ini <span class="token punctuation">{</span>option<span class="token punctuation">}</span>
-</code></pre><ul>
-<li>{num_proc}: 用いるCPUの数</li>
-<li>{num_procpernode}: 用いるメモリ[GB]の量</li>
-<li>{path_to_lib}: 実行ファイルが置かれているライブラリまでのパス．例：<code>path_to_lib = "/home/konishi/lib"</code></li>
-<li>{PManalysis_dirname}: 伝搬解析に用いるC++ファイルの実行ファイルのディレクトリ名</li>
-<li>{option}: 伝搬解析の実行ファイルPManalysis_newのオプション．オプション<code>-ave</code>を使うと</li>
-</ul>
-<p>ファイル例</p>
-<pre data-role="codeBlock" data-info="sh" class="language-bash sh"><code><span class="token shebang important">#!/bin/sh</span>
-mpirun <span class="token parameter variable">-n</span> <span class="token number">20</span> <span class="token parameter variable">-ppn</span> <span class="token number">10</span> <span class="token parameter variable">-f</span> hostfile /home/konishi/lib/Solver/PManalysis_sato_quad_new5_neff/PManalysis_new param.ini <span class="token parameter variable">-ave</span>
-</code></pre><h5 id="伝搬解析を行う計算機を指定する設定ファイルhostfile">伝搬解析を行う計算機を指定する設定ファイル<code>hostfile</code> </h5>
-<pre data-role="codeBlock" data-info="sh" class="language-bash sh"><code><span class="token punctuation">{</span>server_name<span class="token punctuation">}</span>
-</code></pre><p><code>{server_name}</code>: 計算機名<br>
-例：hp18, hp20, ts1</p>
-<p>ファイル例</p>
-<pre data-role="codeBlock" data-info="sh" class="language-bash sh"><code>hp18
-</code></pre><h5 id="伝搬解析のパラメータを記述した設定ファイルparamini">伝搬解析のパラメータを記述した設定ファイル<code>param.ini</code> </h5>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>[PManalysis_new5]
+\tilde\beta_1 &   & O\\
+  & \ddots &  \\
+O &  &  \tilde\beta_n\\
+\end{pmatrix}
+$$ 
+$\dagger$は共役複素転置を表す。このとき、Pが基底変換行列、Dが固有値行列となる。Dは対角成分のみを持つ行列で、その要素はスーパーモードの伝搬定数となる。
+#### 伝搬行列Mの求め方2
+  基底変換行列と固有値行列がわかれば、結合係数$\kappa$を求めずに、突合せ結合係数とスーパーモードの伝搬定数のみからモード結合方程式の行列Mを構成できる。
+#### 伝搬解析用C++プログラムの使い方
+##### 伝搬解析を実行するシェルスクリプト`mpiexec.sh`
+  
+```sh
+#!/bin/sh
+mpirun -n {num_proc} -ppn {num_procpernode} -f hostfile {path_to_lib}/Solver/{PManalysis_dirname}/PManalysis_new param.ini {option}
+```
+- {num_proc}: 用いるCPUの数
+- {num_procpernode}: 用いるメモリ[GB]の量
+- {path_to_lib}: 実行ファイルが置かれているライブラリまでのパス．例：`path_to_lib = "/home/konishi/lib"`
+- {PManalysis_dirname}: 伝搬解析に用いるC++ファイルの実行ファイルのディレクトリ名
+- {option}: 伝搬解析の実行ファイルPManalysis_newのオプション．オプション`-ave`を使うと
+
+ファイル例
+```sh
+#!/bin/sh
+mpirun -n 20 -ppn 10 -f hostfile /home/konishi/lib/Solver/PManalysis_sato_quad_new5_neff/PManalysis_new param.ini -ave
+```
+
+
+##### 伝搬解析を行う計算機を指定する設定ファイル`hostfile`
+
+```sh
+{server_name}
+```
+
+`{server_name}`: 計算機名
+例：hp18, hp20, ts1
+
+ファイル例
+```sh
+hp18
+```
+
+##### 伝搬解析のパラメータを記述した設定ファイル`param.ini`
+```
+[PManalysis_new5]
 data.modenum:	4
 center_xy[um]:	+0.0	+0.0
 mode0(px,py):	10.0	0.0
@@ -216,118 +134,135 @@ RandomBend(sigma)[/mm]:	0
 TwistRate[rad/m](1.0:PI):	1.0
 RandomTwist(sigma)[rad/m](1.0:PI):	0
 Lc[m]:	0.1
-</code></pre><h5 id="基底変換行列を格納したファイルtableudat">基底変換行列を格納したファイル<code>tableU.dat</code> </h5>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>0.500993420914207	0.500529538098675	0.497425018803623	0.501043036223103
+```
+##### 基底変換行列を格納したファイル`tableU.dat`
+```
+0.500993420914207	0.500529538098675	0.497425018803623	0.501043036223103
 0.695126072491569	0.120723450262004	-0.697971352263144	-0.122725642765954
 -0.122479107994722	0.698092500947157	0.120968690401317	-0.695005254723534
 -0.500803557942577	0.49755692153653	-0.500770324630727	0.50086124662095
-</code></pre><ul>
-<li>突き合わせ結合係数<code>cij/MSH{i}_MSH0/c12_re</code> i = 1, ..., Nのファイルを読み込み，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n\times n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>の基底変換行列<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span></span></span></span>を構成する．<br>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>c</mi><mi>i</mi></msub><mo>=</mo><mrow><mo fence="true">(</mo><mtable rowspacing="0.16em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>c</mi><mrow><mi>i</mi><mn>1</mn></mrow></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi><mi mathvariant="normal">⋮</mi><mpadded height="0em" voffset="0em"><mspace mathbackground="black" width="0em" height="1.5em"></mspace></mpadded></mi></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>c</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub></mstyle></mtd></mtr></mtable><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>U</mi><mo>=</mo><mrow><mo fence="true">(</mo><mtable rowspacing="0.16em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msub><mi>c</mi><mn>1</mn></msub><mo>⋯</mo><msub><mi>c</mi><mi>n</mi></msub></mrow></mstyle></mtd></mtr></mtable><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">c_i = \begin{pmatrix}c_{i1}\\ \vdots \\ c_{in}\end{pmatrix}, 
-U = \begin{pmatrix}c_1 \cdots c_n\end{pmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:4.26em;vertical-align:-1.88em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35em;"><span style="top:-4.35em;"><span class="pstrut" style="height:6.2em;"></span><span style="width:0.875em;height:4.200em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="4.200em" viewBox="0 0 875 4200"><path d="M863,9c0,-2,-2,-5,-6,-9c0,0,-17,0,-17,0c-12.7,0,-19.3,0.3,-20,1
-c-5.3,5.3,-10.3,11,-15,17c-242.7,294.7,-395.3,682,-458,1162c-21.3,163.3,-33.3,349,
--36,557 l0,684c0.2,6,0,26,0,60c2,159.3,10,310.7,24,454c53.3,528,210,
-949.7,470,1265c4.7,6,9.7,11.7,15,17c0.7,0.7,7,1,19,1c0,0,18,0,18,0c4,-4,6,-7,6,-9
-c0,-2.7,-3.3,-8.7,-10,-18c-135.3,-192.7,-235.5,-414.3,-300.5,-665c-65,-250.7,-102.5,
--544.7,-112.5,-882c-2,-104,-3,-167,-3,-189
-l0,-692c0,-162.7,5.7,-314,17,-454c20.7,-272,63.7,-513,129,-723c65.3,
--210,155.3,-396.3,270,-559c6.7,-9.3,10,-15.3,10,-18z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.85em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.38em;"><span style="top:-5.2275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.3675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span><span style="top:-2.1675em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.88em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35em;"><span style="top:-4.35em;"><span class="pstrut" style="height:6.2em;"></span><span style="width:0.875em;height:4.200em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="4.200em" viewBox="0 0 875 4200"><path d="M76,0c-16.7,0,-25,3,-25,9c0,2,2,6.3,6,13c21.3,28.7,42.3,60.3,
-63,95c96.7,156.7,172.8,332.5,228.5,527.5c55.7,195,92.8,416.5,111.5,664.5
-c11.3,139.3,17,290.7,17,454c0,28,1.7,43,3.3,45l0,609
-c-3,4,-3.3,16.7,-3.3,38c0,162,-5.7,313.7,-17,455c-18.7,248,-55.8,469.3,-111.5,664
-c-55.7,194.7,-131.8,370.3,-228.5,527c-20.7,34.7,-41.7,66.3,-63,95c-2,3.3,-4,7,-6,11
-c0,7.3,5.7,11,17,11c0,0,11,0,11,0c9.3,0,14.3,-0.3,15,-1c5.3,-5.3,10.3,-11,15,-17
-c242.7,-294.7,395.3,-681.7,458,-1161c21.3,-164.7,33.3,-350.7,36,-558
-l0,-744c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
--470,-1265c-4.7,-6,-9.7,-11.7,-15,-17c-0.7,-0.7,-6.7,-1,-18,-1z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.85em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.85em;"><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35em;"><span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span></span></li>
-</ul>
-<h5 id="スーパーモードの伝搬定数を格納したファイルtablekxdat">スーパーモードの伝搬定数を格納したファイル<code>tablekx.dat</code> </h5>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>5.865236836628815
+```
+- 突き合わせ結合係数`cij/MSH{i}_MSH0/c12_re` i = 1, ..., Nのファイルを読み込み，$n\times n$の基底変換行列$U$を構成する．
+$$
+c_i = \begin{pmatrix}c_{i1}\\ \vdots \\ c_{in}\end{pmatrix}, 
+U = \begin{pmatrix}c_1 \cdots c_n\end{pmatrix}
+$$
+
+##### スーパーモードの伝搬定数を格納したファイル`tablekx.dat`
+```
+5.865236836628815
 5.864654482336022
 5.864654481157570
 5.864105535290867
-</code></pre><ul>
-<li>スーパーモード (couple) の伝搬定数を大きい順で上から並べたファイルです．</li>
-</ul>
-<h5 id="スーパーモードの群屈折率を格納したファイルtablengdat">スーパーモードの群屈折率を格納したファイル<code>tableng.dat</code> </h5>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>1.449410803711804
+```
+- スーパーモード (couple) の伝搬定数を大きい順で上から並べたファイルです．
+
+##### スーパーモードの群屈折率を格納したファイル`tableng.dat`
+```
+1.449410803711804
 1.449940829048378
 1.449940828752061
 1.450437689530682
-</code></pre><ul>
-<li><code>tablekx.dat</code>の各モードに対応する群屈折率．順番は<code>tablekx.dat</code>の各モードに対応する順．</li>
-</ul>
-<h4 id="分散曲線とモード数">分散曲線とモード数 </h4>
-<ul>
-<li>単一コアあたりに伝搬するモード数を決めるときは、所望のモード数となる構造の条件を分散曲線から求める。</li>
-</ul>
-<h4 id="並列計算の方法">並列計算の方法 </h4>
-<ul>
-<li>Pythonの場合は種々の方法があるが、<code>multiprocessing</code>ライブラリを用いている。</li>
-</ul>
-<h4 id="よくあるグラフの描画方法">よくあるグラフの描画方法 </h4>
-<ul>
-<li>GDSの伝搬距離依存性</li>
-<li>GDSの曲げ半径依存性</li>
-<li>neffの伝搬距離依存性</li>
-<li>GDSスロープの伝搬距離依存性</li>
-<li>GDSスロープの曲げ半径依存性</li>
-<li>カラーマップ</li>
-</ul>
-<pre data-role="codeBlock" data-info="python" class="language-python python"><code>gds_params <span class="token operator">=</span> <span class="token punctuation">{</span>
-                <span class="token string">'distance[m]'</span><span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
-                <span class="token string">'dz[m]'</span><span class="token punctuation">:</span> <span class="token number">0.001</span><span class="token punctuation">,</span>
-                <span class="token string">'Rbend[mm]'</span><span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
-                <span class="token string">'RandomBend(sigma)[/mm]'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-                <span class="token string">'TwistRate[rad/m](1.0:PI)'</span><span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span>
-                <span class="token string">'RandomTwist(sigma)[rad/m](1.0:PI)'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-                <span class="token string">'Lc[m]'</span><span class="token punctuation">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span>
-                <span class="token string">'loop'</span><span class="token punctuation">:</span> <span class="token number">1</span>
-            <span class="token punctuation">}</span>
-</code></pre><ul>
-<li><code>distance[m]</code>: 伝搬距離を表す整数型 (int) のパラメータです．単位はmです．</li>
-<li><code>dz[m]</code>: セグメント長を表すfloat型のパラメータです．単位はmです．</li>
-<li><code>Rbend[mm]</code>: 曲げ半径を表す整数型 (int) のパラメータです．単位はmmです．</li>
-<li><code>RandomBend(sigma)[/mm]</code>: ランダムな曲げを表すfloat型のパラメータです．単位はmです．</li>
-<li><code>TwistRate[rad/m](1.0:PI)</code>: ファイバの一定のねじれを表すfloat型のパラメータです．単位はrad/mです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．</li>
-<li><code>RandomTwist(sigma)[rad/m](1.0:PI)</code>: ファイバのランダムなねじれを表すfloat型のパラメータです．単位はmです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．</li>
-<li><code>Lc[m]</code>: ランダム位相誤差のランダム性を決定する相関長と呼ばれるfloat型のパラメータです．単位はmです．Lcは小さいほどランダム性が大きくなります．</li>
-<li><code>loop</code>: GDSの計算回数を表す整数型 (int) のパラメータです．</li>
-</ul>
-<h2 id="ライブラリの説明">ライブラリの説明 </h2>
-<h3 id="fibercalc_fiber">fiber.calc_fiber </h3>
-<p><code>result = calc_fiber(structure_dict, gif = False, pdf = False, couple = True, single = True, cij = True, kij = True, table = False)</code></p>
-<p>ステップインデックス型光ファイバの断面解析を行い，結果を格納した辞書<code>result</code>を返します．また，新たに<code>data</code>ディレクトリを作成し，計算結果ファイルを出力します．</p>
-<h4 id="各引数の説明">各引数の説明 </h4>
-<p><code>structure_dict</code>は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．</p>
-<pre data-role="codeBlock" data-info="python" class="language-python python"><code>structure_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token string">'num_of_core'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
-    <span class="token string">'core_radius'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">,</span> <span class="token number">4.55</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">'x_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">'y_list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">'coredeltas'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">'wavelength[um]'</span><span class="token punctuation">:</span> <span class="token number">1.55</span>
-<span class="token punctuation">}</span>
-</code></pre><ul>
-<li><code>num_of_core</code>はコア数を表す整数型 (int) 型のパラメータです．</li>
-<li><code>core_radius</code>はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
-<li><code>x_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
-<li><code>y_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
-<li><code>coredeltas</code>はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．</li>
-<li><code>wavelength[um]</code>は解析波長を表すfloat型のパラメータで，単位はμmです．</li>
-</ul>
-<h4 id="出力ファイルの場所">出力ファイルの場所 </h4>
-<p><code>data</code>ディレクトリ内に構造ごとのディレクトリが作成され、出力データが格納されます。<br>
-構造ごとのディレクトリ名は、入力した<code>structure_dict</code>から決定されます。具体的には、読み込んだデータから構成した文字列をさらにハッシュ化した文字列がディレクトリ名となります．ハッシュ化に必要なデータは次の4種類です．小数点3桁までが反映されます。小数点4桁目は四捨五入されます。</p>
-<ul>
-<li>コア径</li>
-<li>x座標</li>
-<li>y座標</li>
-<li>コアの比屈折率</li>
-</ul>
-<p>ディレクトリ構造は次の通りです。</p>
+```
+- `tablekx.dat`の各モードに対応する群屈折率．順番は`tablekx.dat`の各モードに対応する順．
+
+### Tips
+#### 分散曲線とモード数
+- 単一コアあたりに伝搬するモード数を決めるときは、所望のモード数となる構造の条件を分散曲線から求める。
+#### 並列計算の方法
+- Pythonの場合は種々の方法があるが、`multiprocessing`ライブラリを用いている。
+#### よくあるグラフの描画方法
+- GDSの伝搬距離依存性
+- GDSの曲げ半径依存性
+- neffの伝搬距離依存性
+- GDSスロープの伝搬距離依存性
+- GDSスロープの曲げ半径依存性
+- カラーマップ
+
+
+## ライブラリの説明
+### fiber.calc_fiber
+`result = calc_fiber(structure_dict, gif = False, pdf = False, couple = True, single = True, cij = True, kij = True, table = False)`
+
+ステップインデックス型光ファイバの断面解析を行い，結果を格納した辞書`result`を返します．また，新たに`data`ディレクトリを作成し，計算結果ファイルを出力します．
+
+#### 各引数の説明
+`structure_dict`は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．
+
+```python
+structure_dict = {
+    'num_of_core': 4,
+    'core_radius': [4.55, 4.55, 4.55, 4.55],
+    'x_list': [10, 0, -10, 0],
+    'y_list': [0, 10, 0, -10],
+    'coredeltas': [0.35, 0.35, 0.35, 0.35],
+    'wavelength[um]': 1.55
+}
+```
+
+- `num_of_core`はコア数を表す整数型 (int) 型のパラメータです．
+- `core_radius`はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
+- `x_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
+- `y_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
+- `coredeltas`はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．
+- `wavelength[um]`は解析波長を表すfloat型のパラメータで，単位はμmです．
+
+#### 出力ファイルの場所
+`data`ディレクトリ内に構造ごとのディレクトリが作成され、出力データが格納されます。
+構造ごとのディレクトリ名は、入力した`structure_dict`から決定されます。具体的には、読み込んだデータから構成した文字列をさらにハッシュ化した文字列がディレクトリ名となります．ハッシュ化に必要なデータは次の4種類です．小数点3桁までが反映されます。小数点4桁目は四捨五入されます。
+
+- コア径
+- x座標
+- y座標
+- コアの比屈折率
+<!-- 
+```python
+# ハッシュ化の関数 lib/python/fiber/binary_search.py
+def generate_hash(gene):
+    data = {
+            'num_of_core': 2,
+            'core_radius': [-1, -1],
+            'x_list': [-1, -1],
+            'y_list': [-1, -1],
+            'coredeltas': [-1, -1],
+            'wavelength[um]': -1
+        }
+    
+    # if key is not in gene, raise error
+    for key in data.keys():
+        if key not in gene.keys():
+            raise KeyError(f'{key} not found! {key} is necessary for generating hash')
+        
+    # if value is negative, raise error
+    for key in data.keys():
+        if key == 'core_radius' or key == 'coredeltas':
+            for i in range(len(gene[key])):
+                if gene[key][i] < 0:
+                    raise ValueError(f'{key} is negative')
+        elif type(gene[key]) == float or type(gene[key]) == int:
+            if gene[key] < 0:
+                raise ValueError(f'{key} is negative')
+
+    hash_related_key = ['core_radius', 'x_list', 'y_list', 'coredeltas']
+    cat_gene = ''
+    for key in sorted(hash_related_key):
+        if type(gene[key]) == list:
+            for i in range(len(gene[key])):
+                cat_gene += f'{round(gene[key][i], 3):.3f}'  # 有効数字2桁に丸める
+        elif type(gene[key]) == float or type(gene[key]) == int:
+            cat_gene += f'{round(gene[key], 3):.3f}'
+
+    hashed_key = hash_string(cat_gene)
+
+    return hashed_key
+``` -->
+
+ディレクトリ構造は次の通りです。
+<!-- ![alt text](img/image.png) -->
 <details><summary>ディレクトリ構造</summary>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>/data/0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04
+
+```
+/data/0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04
 |--wavelength_1550nm
 | |--2core.pdf
 | |--M.dat
@@ -413,64 +348,170 @@ l0,-744c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 | |--tableU.dat
 | |--tablekx.dat
 | |--tableng.dat
-</code></pre></details>
-<h4 id="calc_fiberの返り値">calc_fiberの返り値 </h4>
-<p><code>result = calc_fiber()</code>の返り値<code>result</code>は辞書となる。</p>
-<pre data-role="codeBlock" data-info="python" class="language-python python"><code>result <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token string">'couple_ng1'</span><span class="token punctuation">:</span> <span class="token number">1.449856368659995</span><span class="token punctuation">,</span> 
-    <span class="token string">'couple_ng2'</span><span class="token punctuation">:</span> <span class="token number">1.449966748736736</span><span class="token punctuation">,</span> 
-    <span class="token string">'gds'</span><span class="token punctuation">:</span> <span class="token number">184.09415213018656</span><span class="token punctuation">,</span> 
-    <span class="token string">'neff_r'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'1.446778327208198'</span><span class="token punctuation">,</span> <span class="token string">'1.446762495564402'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'neff_i'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">,</span> <span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'k0_r[rad/um]'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'4.053667940115862'</span><span class="token punctuation">,</span> <span class="token string">'4.053667940115862'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'k0_i[rad/um]'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">,</span> <span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'kx_r[rad/um]'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'5.864758921458329'</span><span class="token punctuation">,</span> <span class="token string">'5.864694745231435'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'kx_i[rad/um]'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">,</span> <span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'ng_r'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'1.449856368659995'</span><span class="token punctuation">,</span> <span class="token string">'1.449966748736736'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'ng_i'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">,</span> <span class="token string">'0.000000000000000e+00'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'Aeff[um^2]'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'1.693249940482153e+02'</span><span class="token punctuation">,</span> <span class="token string">'1.653398877788967e+02'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-    <span class="token string">'single2_beta'</span><span class="token punctuation">:</span> <span class="token number">5.864726994285341</span><span class="token punctuation">,</span> 
-    <span class="token string">'single2_ng'</span><span class="token punctuation">:</span> <span class="token number">1.449910908777932</span><span class="token punctuation">,</span> 
-    <span class="token string">'single1_beta'</span><span class="token punctuation">:</span> <span class="token number">5.864726993356653</span><span class="token punctuation">,</span> 
-    <span class="token string">'single1_ng'</span><span class="token punctuation">:</span> <span class="token number">1.449910908242495</span><span class="token punctuation">,</span> 
-    <span class="token string">'kappa12'</span><span class="token punctuation">:</span> <span class="token number">3.1979750129e-05</span><span class="token punctuation">,</span> 
-    <span class="token string">'kappa21'</span><span class="token punctuation">:</span> <span class="token number">3.1979474425e-05</span><span class="token punctuation">,</span>
-    <span class="token string">'dirpath'</span><span class="token punctuation">:</span> <span class="token string">'0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04'</span>
-    <span class="token punctuation">}</span>
-</code></pre><ul>
-<li><code>couple_ng{i}</code>: i番目のスーパーモードの群屈折率</li>
-<li><code>gds</code>: 群遅延広がり (Group Delay Spread: GDS)。スーパーモードの群遅延時間<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>g</mi></msub></mrow><annotation encoding="application/x-tex">n_g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>の分散で定義される。<br>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mi mathvariant="normal">G</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">S</mi></mrow><mo>=</mo><msqrt><mrow><mfrac><mn>1</mn><mi>N</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><mo stretchy="false">(</mo><msub><mi>τ</mi><mi>i</mi></msub><mo>−</mo><msub><mi>τ</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">v</mi><mi mathvariant="normal">e</mi></mrow></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mo separator="true">,</mo><mspace width="1em"></mspace><msub><mi>τ</mi><mi>i</mi></msub><mo>=</mo><mi>L</mi><mfrac><msub><mi>n</mi><mrow><mi>g</mi><mi>i</mi></mrow></msub><mi>c</mi></mfrac><mo separator="true">,</mo><mspace width="1em"></mspace><msub><mi>τ</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">v</mi><mi mathvariant="normal">e</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><msub><mi>τ</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\mathrm{GDS} = \sqrt{\dfrac{1}{N}\sum_{i=1}^{N}(\tau_i - \tau_{\mathrm{ave}})^2},\quad \tau_i = L\dfrac{n_{gi}}{c},\quad \tau_{\mathrm{ave}} = \dfrac{1}{N}\sum_{i=1}^{N}\tau_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord"><span class="mord mathrm">GDS</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.3338em;vertical-align:-1.2777em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.0561em;"><span class="svg-align" style="top:-5.2938em;"><span class="pstrut" style="height:5.2938em;"></span><span class="mord" style="padding-left:1.056em;"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">ave</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-4.0161em;"><span class="pstrut" style="height:5.2938em;"></span><span class="hide-tail" style="min-width:0.742em;height:3.3738em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="3.3738em" viewBox="0 0 400000 3373" preserveAspectRatio="xMinYMin slice"><path d="M702 80H40000040
-H742v3239l-4 4-4 4c-.667.7 -2 1.5-4 2.5s-4.167 1.833-6.5 2.5-5.5 1-9.5 1
-h-12l-28-84c-16.667-52-96.667 -294.333-240-727l-212 -643 -85 170
-c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
-219 661 l218 661zM702 80H400000v40H742z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.7936em;vertical-align:-0.686em;"></span><span class="mord mathnormal">L</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">c</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">ave</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.106em;vertical-align:-1.2777em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></li>
-<li><code>neff_r</code>: スーパーモードの実効屈折率の実部を格納した配列</li>
-<li><code>neff_i</code>: スーパーモードの実効屈折率の虚部を格納した配列</li>
-<li><code>k0_r[rad/um]</code>: 自由空間波数の実部を格納した配列</li>
-<li><code>k0_i[rad/um]</code>: 自由空間波数の虚部を格納した配列</li>
-<li><code>kx_r[rad/um]</code>: スーパーモードの伝搬定数の実部を格納した配列</li>
-<li><code>kx_i[rad/um]</code>: スーパーモードの伝搬定数の虚部を格納した配列</li>
-<li><code>ng_r</code>: スーパーモードの群屈折率の実部を格納した配列</li>
-<li><code>ng_i</code>: スーパーモードの群屈折率の虚部を格納した配列</li>
-<li><code>Aeff[um^2]</code>: 実効断面積を格納した配列</li>
-<li><code>single{i}_beta</code>: i番目の個別コアモードの伝搬定数</li>
-<li><code>single{i}_ng</code>: i番目の個別コアモードの群屈折率</li>
-<li><code>kappa{i}{j}</code>: コアi, j間の結合係数</li>
-<li><code>dirpath</code>: 解析データを格納する<code>data</code>ディレクトリ内のパス。ディレクトリ名はハッシュ値である。</li>
-</ul>
-<h3 id="pmpycalc_gds">pmpy.calc_gds </h3>
-<h3 id="fibercalc_rbend_gds">fiber.calc_rbend_gds </h3>
-<h3 id="fibergenerate_hashgene_dict">fiber.generate_hash(gene_dict) </h3>
+```
+</details>
 
-      </div>
-      
-      
-    
-    
-    
-    
-    
-    
-  
-    </body></html>
+#### 返り値
+`result = calc_fiber()`の返り値`result`は辞書となる。
+```python
+result = {
+    'couple_ng1': 1.449856368659995, 
+    'couple_ng2': 1.449966748736736, 
+    'gds': 184.09415213018656, 
+    'neff_r': ['1.446778327208198', '1.446762495564402'], 
+    'neff_i': ['0.000000000000000e+00', '0.000000000000000e+00'], 
+    'k0_r[rad/um]': ['4.053667940115862', '4.053667940115862'], 
+    'k0_i[rad/um]': ['0.000000000000000e+00', '0.000000000000000e+00'], 
+    'kx_r[rad/um]': ['5.864758921458329', '5.864694745231435'], 
+    'kx_i[rad/um]': ['0.000000000000000e+00', '0.000000000000000e+00'], 
+    'ng_r': ['1.449856368659995', '1.449966748736736'], 
+    'ng_i': ['0.000000000000000e+00', '0.000000000000000e+00'], 
+    'Aeff[um^2]': ['1.693249940482153e+02', '1.653398877788967e+02'], 
+    'single2_beta': 5.864726994285341, 
+    'single2_ng': 1.449910908777932, 
+    'single1_beta': 5.864726993356653, 
+    'single1_ng': 1.449910908242495, 
+    'kappa12': 3.1979750129e-05, 
+    'kappa21': 3.1979474425e-05,
+    'dirpath': '0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04'
+    }
+```
+
+- `couple_ng{i}`: i番目のスーパーモードの群屈折率
+- `gds`: 群遅延広がり (Group Delay Spread: GDS)。スーパーモードの群遅延時間$n_g$の分散で定義される。
+  $$
+  \mathrm{GDS} = \sqrt{\dfrac{1}{N}\sum_{i=1}^{N}(\tau_i - \tau_{\mathrm{ave}})^2},\quad \tau_i = L\dfrac{n_{gi}}{c},\quad \tau_{\mathrm{ave}} = \dfrac{1}{N}\sum_{i=1}^{N}\tau_i
+  $$
+- `neff_r`: スーパーモードの実効屈折率の実部を格納した配列
+- `neff_i`: スーパーモードの実効屈折率の虚部を格納した配列
+- `k0_r[rad/um]`: 自由空間波数の実部を格納した配列
+- `k0_i[rad/um]`: 自由空間波数の虚部を格納した配列
+- `kx_r[rad/um]`: スーパーモードの伝搬定数の実部を格納した配列
+- `kx_i[rad/um]`: スーパーモードの伝搬定数の虚部を格納した配列
+- `ng_r`: スーパーモードの群屈折率の実部を格納した配列
+- `ng_i`: スーパーモードの群屈折率の虚部を格納した配列
+- `Aeff[um^2]`: 実効断面積を格納した配列
+- `single{i}_beta`: i番目の個別コアモードの伝搬定数
+- `single{i}_ng`: i番目の個別コアモードの群屈折率
+- `kappa{i}{j}`: コアi, j間の結合係数
+- `dirpath`: 解析データを格納する`data`ディレクトリ内のパス。ディレクトリ名はハッシュ値である。
+
+### pmpy.calc_gds
+`calc_gds(structure_dict, gds_params_dict, num_loop, num_cpu = 1, num_mem = 1, filename_dict = {}, prefilename = 'prefile', PManalysis_dirname = "PManalysis_sato_quad_new5_neff", output_dirname = 'gds_result', graph = False)`
+光ファイバの伝搬解析シミュレーションを行い、結果をファイルに出力します。関数自体の出力は`None`です。
+#### 各引数の説明
+- structure_dict
+  - `structure_dict`は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．
+
+  ```python
+  structure_dict = {
+      'num_of_core': 4,
+      'core_radius': [4.55, 4.55, 4.55, 4.55],
+      'x_list': [10, 0, -10, 0],
+      'y_list': [0, 10, 0, -10],
+      'coredeltas': [0.35, 0.35, 0.35, 0.35],
+      'wavelength[um]': 1.55
+  }
+  ```
+
+  - `num_of_core`はコア数を表す整数型 (int) 型のパラメータです．
+  - `core_radius`はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
+  - `x_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
+  - `y_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
+  - `coredeltas`はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．
+  - `wavelength[um]`は解析波長を表すfloat型のパラメータで，単位はμmです．
+- gds_params_dict
+  - `gds_params_dict`は、伝搬解析のパラメータを記述した辞書です。以下の例のように，8つのキーを指定します．
+  ```python
+  gds_params_dict = {
+                  'distance[m]': 1000,
+                  'dz[m]': 0.001,
+                  'Rbend[mm]': 150,
+                  'RandomBend(sigma)[/mm]': 0,
+                  'TwistRate[rad/m](1.0:PI)': 1.0,
+                  'RandomTwist(sigma)[rad/m](1.0:PI)': 0,
+                  'Lc[m]': 0.1,
+                  'loop': 1
+              }
+  ```
+  - `distance[m]`: 伝搬距離を表す整数型 (int) のパラメータです．単位はmです．
+  - `dz[m]`: セグメント長を表すfloat型のパラメータです．単位はmです．
+  - `Rbend[mm]`: 曲げ半径を表す整数型 (int) のパラメータです．単位はmmです．
+  - `RandomBend(sigma)[/mm]`: ランダムな曲げを表すfloat型のパラメータです．単位はmです．
+  - `TwistRate[rad/m](1.0:PI)`: ファイバの一定のねじれを表すfloat型のパラメータです．単位はrad/mです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．
+  - `RandomTwist(sigma)[rad/m](1.0:PI)`: ファイバのランダムなねじれを表すfloat型のパラメータです．単位はmです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．
+  - `Lc[m]`: ランダム位相誤差のランダム性を決定する相関長と呼ばれるfloat型のパラメータです．単位はmです．Lcは小さいほどランダム性が大きくなります．
+  - `loop`: GDSの計算回数を表す整数型 (int) のパラメータです．
+- num_loop
+  - GDSの計算回数を指定するパラメータ。一般に、伝搬解析では正規分布に従うランダムな摂動が加わるため、計算回数を増やして平均を取ることで母集団の平均に近づけることができる。
+- num_cpu = 1
+  - 並列計算に使用するCPUの数。計算機の最大CPU数を超えないように設定する。num_cpuを増やすと、計算時間が短縮される。
+- num_mem = 1
+  - 計算に使用するメモリ量[GB]。計算機の最大メモリ量を超えないように設定する。
+- filename_dict = {}
+  - 伝搬解析に必要な設定ファイルの名前をカスタムするパラメータ。デフォルトでは、次の名前となっている。
+    - `mpiexec.sh`
+    - `hostname`
+    - `param.ini`
+    - `tableU.dat`
+    - `tablekx.dat`
+    - `tableng.dat`
+  - 入力ファイル名がデフォルトと異なる場合には、`filename_dict`を次のように記述する。
+  ```python
+  filename_dict = {
+        'mpiexec.sh': 'mpiexec_new.sh',
+        'hostfile': 'hostfile_new',
+        'param.ini': 'param_new.ini',
+        'tableU.dat': 'tableU_new.dat',
+        'tableng.dat': 'tableng_new.dat',
+        'tablekx.dat': 'tablekx_new.dat'
+    }
+  ```
+  ここでは、既存のファイル名に`_new`を付けたファイルを読み込むことを想定した。
+- prefilename = 'prefile'
+  - 結果を出力するディレクトリ名を設定。デフォルトでは`gds_params_dict`のデータを使って、`prefilename = f'prefile_rndBend{gds_params_dict["RandomBend"]}_rndTwist{gds_params_dict["RandomTwist"]}'`が設定される。
+- PManalysis_dirname = "PManalysis_sato_quad_new5_neff"
+  - 伝搬解析に用いる実行ファイルのディレクトリ名を指定する。サポート中のディレクトリ名は`/home/konishi/lib/Solver/`から確認できる。2024年6月4日現在、次のディレクトリ名がサポートされている。
+  ```python
+  [
+      'PManalysis_indivisual', 
+      'PManalysis_sato_quad_new5',
+      'PManalysis_sato_quad_new5_neff',
+      'PManalysis_indivisual_ip_im', 
+      'PManalysis_couple_ip_im', 
+      'PManalysis_couple_ip_im_neff_record',
+      'PManalysis_couple_ip_im_neff',
+      'PManalysis_couple_neff',
+      'PManalysis_indivisual_neff',
+      'PManalysis_konishi_indivisual',
+      'PManalysis_konishi_couple',
+      'PManalysis_konishi_indivisual_new'
+  ]
+  ``` 
+  - デフォルトでは、`PManalysis_sato_quad_new5_neff`が用いられており、主な仕様は次のとおりである。
+    - 相関長によるランダム位相誤差を考慮
+    - ランダム位相誤差の周波数依存性は考慮しない
+    - ランダム位相誤差はスーパーモードに乗算
+    - 実効屈折率の伝搬距離依存性データを出力
+    - GDSの伝搬距離依存性データを出力
+    - 群遅延時間の伝搬距離依存性データを出力
+    - GDSスロープの伝搬距離依存性データを出力
+- output_dirname = 'gds_result'
+  - 出力ディレクトリの名前を設定する。デフォルトでは`gds_result`になる。
+- graph = False
+  - グラフを出力する場合はTrue、しない場合はFalseに設定する。デフォルトではFalseに設定されている。
+#### 出力ファイルの場所
+- 伝搬計算の結果を格納しているディレクトリは次のようになっている。
+`/data/構造特有のハッシュ値/wavelength_{波長}nm/gds_result/prefilename/TwistRate{ツイスト率}/pd{伝搬距離}_dz{セグメント長}_rbend{曲げ半径}_Lc{相関長}`
+例：`~/32ed8ee40e9fbbc510855d1a9ba715be6df6fb5252c6316d1b918c0a0c8abd2c/wavelength_1550nm/gds_result/_prefile_sato_quad_new5_neff_tr1.0_Lc0/TwistRate1.0/pd1000_dz0.001_rbend10000_Lc0`
+#### 返り値
+`calc_gds`の返り値は`None`である。計算した結果はすべてファイルに保存される。
+
+### fiber.calc_rbend_gds
+
+
+### fiber.generate_hash(gene_dict)
+
+<!-- In-product release notes styles.  Do not modify without also modifying regex in gulpfile.common.js -->
+<a id="scroll-to-top" role="button" aria-label="scroll to top" onclick="scroll(0,0)"><span class="icon"></span></a>
+<link rel="stylesheet" type="text/css" href="inproduct_releasenotes.css"/>
