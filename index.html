@@ -1,123 +1,513 @@
-# ファイバ計算Pythonライブラリマニュアル
+<!DOCTYPE html>
+<html>
+<head>
+<title>manual.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
-- [ファイバ計算Pythonライブラリマニュアル](#ファイバ計算pythonライブラリマニュアル)
-- [](#)
-  - [ファイバ計算用Pythonライブラリ](#ファイバ計算用pythonライブラリ)
-    - [断面解析](#断面解析)
-      - [構造を決めるlpsファイルの書き方](#構造を決めるlpsファイルの書き方)
-      - [有限要素法の設定ファイルであるcfgファイルの書き方](#有限要素法の設定ファイルであるcfgファイルの書き方)
-      - [2次元スカラ有限要素法に必要なファイル](#2次元スカラ有限要素法に必要なファイル)
-      - [有限要素法の実行ファイル](#有限要素法の実行ファイル)
-      - [結合係数の実行ファイル](#結合係数の実行ファイル)
-      - [突き合わせ結合係数の実行ファイル](#突き合わせ結合係数の実行ファイル)
-    - [伝搬解析](#伝搬解析)
-      - [伝搬行列Mの求め方1](#伝搬行列mの求め方1)
-      - [基底変換行列Pの求め方](#基底変換行列pの求め方)
-      - [伝搬行列Mの求め方2](#伝搬行列mの求め方2)
-      - [伝搬解析用C++プログラムの使い方](#伝搬解析用cプログラムの使い方)
-        - [伝搬解析を実行するシェルスクリプト`mpiexec.sh`](#伝搬解析を実行するシェルスクリプトmpiexecsh)
-        - [伝搬解析を行う計算機を指定する設定ファイル`hostfile`](#伝搬解析を行う計算機を指定する設定ファイルhostfile)
-        - [伝搬解析のパラメータを記述した設定ファイル`param.ini`](#伝搬解析のパラメータを記述した設定ファイルparamini)
-        - [基底変換行列を格納したファイル`tableU.dat`](#基底変換行列を格納したファイルtableudat)
-        - [スーパーモードの伝搬定数を格納したファイル`tablekx.dat`](#スーパーモードの伝搬定数を格納したファイルtablekxdat)
-        - [スーパーモードの群屈折率を格納したファイル`tableng.dat`](#スーパーモードの群屈折率を格納したファイルtablengdat)
-    - [Tips](#tips)
-      - [分散曲線とモード数](#分散曲線とモード数)
-      - [並列計算の方法](#並列計算の方法)
-      - [よくあるグラフの描画方法](#よくあるグラフの描画方法)
-  - [ライブラリの説明](#ライブラリの説明)
-    - [fiber.calc\_fiber](#fibercalc_fiber)
-      - [各引数の説明](#各引数の説明)
-      - [出力ファイルの場所](#出力ファイルの場所)
-      - [返り値](#返り値)
-    - [pmpy.calc\_gds](#pmpycalc_gds)
-      - [各引数の説明](#各引数の説明-1)
-      - [出力ファイルの場所](#出力ファイルの場所-1)
-      - [返り値](#返り値-1)
-    - [fiber.calc\_rbend\_gds](#fibercalc_rbend_gds)
-    - [fiber.generate\_hash(gene\_dict)](#fibergenerate_hashgene_dict)
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
-#
-## ファイバ計算用Pythonライブラリ
-### 断面解析
-#### 構造を決めるlpsファイルの書き方
-#### 有限要素法の設定ファイルであるcfgファイルの書き方
-#### 2次元スカラ有限要素法に必要なファイル
-- Ncore.msh, Ncore.cfg
-#### 有限要素法の実行ファイル
-- `Solver/new_2D_SFEM_20210604b/sfem {N}core`
-#### 結合係数の実行ファイル
-- `Solver/new_2D_SFEM_overlap/sfem_overlap single{N}/{N}core couple/{N}core`
-#### 突き合わせ結合係数の実行ファイル
-- `Solver/new_2D_SFEM_overlap_kappa/sfem_overlap single{i}/{N}core single{j}/{N}core couple/{N}core`
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
 
-### 伝搬解析
-#### 伝搬行列Mの求め方1
-有限要素法から計算した、個別コアモードの伝搬定数と、結合係数から次式の行列Mを構成する。
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E8%A8%88%E7%AE%97python%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB">ファイバ計算Pythonライブラリマニュアル</h1>
+<ul>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E8%A8%88%E7%AE%97python%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB">ファイバ計算Pythonライブラリマニュアル</a></li>
+<li><a href="#"></a>
+<ul>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E8%A8%88%E7%AE%97%E7%94%A8python%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">ファイバ計算用Pythonライブラリ</a>
+<ul>
+<li><a href="#%E6%96%AD%E9%9D%A2%E8%A7%A3%E6%9E%90">断面解析</a>
+<ul>
+<li><a href="#%E6%A7%8B%E9%80%A0%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8Blps%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">構造を決めるlpsファイルの書き方</a></li>
+<li><a href="#%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%81%82%E3%82%8Bcfg%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">有限要素法の設定ファイルであるcfgファイルの書き方</a></li>
+<li><a href="#2%E6%AC%A1%E5%85%83%E3%82%B9%E3%82%AB%E3%83%A9%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">2次元スカラ有限要素法に必要なファイル</a></li>
+<li><a href="#%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">有限要素法の実行ファイル</a></li>
+<li><a href="#%E7%B5%90%E5%90%88%E4%BF%82%E6%95%B0%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">結合係数の実行ファイル</a></li>
+<li><a href="#%E7%AA%81%E3%81%8D%E5%90%88%E3%82%8F%E3%81%9B%E7%B5%90%E5%90%88%E4%BF%82%E6%95%B0%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">突き合わせ結合係数の実行ファイル</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90">伝搬解析</a>
+<ul>
+<li><a href="#%E4%BC%9D%E6%90%AC%E8%A1%8C%E5%88%97m%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B91">伝搬行列Mの求め方1</a></li>
+<li><a href="#%E5%9F%BA%E5%BA%95%E5%A4%89%E6%8F%9B%E8%A1%8C%E5%88%97p%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B9">基底変換行列Pの求め方</a></li>
+<li><a href="#%E4%BC%9D%E6%90%AC%E8%A1%8C%E5%88%97m%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B92">伝搬行列Mの求め方2</a></li>
+<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E7%94%A8c%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9">伝搬解析用C++プログラムの使い方</a>
+<ul>
+<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88mpiexecsh">伝搬解析を実行するシェルスクリプト<code>mpiexec.sh</code></a></li>
+<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%82%92%E8%A1%8C%E3%81%86%E8%A8%88%E7%AE%97%E6%A9%9F%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABhostfile">伝搬解析を行う計算機を指定する設定ファイル<code>hostfile</code></a></li>
+<li><a href="#%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%81%AE%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%92%E8%A8%98%E8%BF%B0%E3%81%97%E3%81%9F%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABparamini">伝搬解析のパラメータを記述した設定ファイル<code>param.ini</code></a></li>
+<li><a href="#%E5%9F%BA%E5%BA%95%E5%A4%89%E6%8F%9B%E8%A1%8C%E5%88%97%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtableudat">基底変換行列を格納したファイル<code>tableU.dat</code></a></li>
+<li><a href="#%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%A2%E3%83%BC%E3%83%89%E3%81%AE%E4%BC%9D%E6%90%AC%E5%AE%9A%E6%95%B0%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtablekxdat">スーパーモードの伝搬定数を格納したファイル<code>tablekx.dat</code></a></li>
+<li><a href="#%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%A2%E3%83%BC%E3%83%89%E3%81%AE%E7%BE%A4%E5%B1%88%E6%8A%98%E7%8E%87%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtablengdat">スーパーモードの群屈折率を格納したファイル<code>tableng.dat</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tips">Tips</a>
+<ul>
+<li><a href="#%E5%88%86%E6%95%A3%E6%9B%B2%E7%B7%9A%E3%81%A8%E3%83%A2%E3%83%BC%E3%83%89%E6%95%B0">分散曲線とモード数</a></li>
+<li><a href="#%E4%B8%A6%E5%88%97%E8%A8%88%E7%AE%97%E3%81%AE%E6%96%B9%E6%B3%95">並列計算の方法</a></li>
+<li><a href="#%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E3%82%B0%E3%83%A9%E3%83%95%E3%81%AE%E6%8F%8F%E7%94%BB%E6%96%B9%E6%B3%95">よくあるグラフの描画方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E8%AA%AC%E6%98%8E">ライブラリの説明</a>
+<ul>
+<li><a href="#fibercalc_fiber">fiber.calc_fiber</a>
+<ul>
+<li><a href="#%E5%90%84%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E">各引数の説明</a></li>
+<li><a href="#%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80">出力ファイルの場所</a></li>
+<li><a href="#%E8%BF%94%E3%82%8A%E5%80%A4">返り値</a></li>
+</ul>
+</li>
+<li><a href="#pmpycalc_gds">pmpy.calc_gds</a>
+<ul>
+<li><a href="#%E5%90%84%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E-1">各引数の説明</a></li>
+<li><a href="#%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80-1">出力ファイルの場所</a></li>
+<li><a href="#%E8%BF%94%E3%82%8A%E5%80%A4-1">返り値</a></li>
+</ul>
+</li>
+<li><a href="#fibercalc_rbend_gds">fiber.calc_rbend_gds</a></li>
+<li><a href="#fibergenerate_hashgene_dict">fiber.generate_hash(gene_dict)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id=""></h1>
+<h2 id="%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E8%A8%88%E7%AE%97%E7%94%A8python%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">ファイバ計算用Pythonライブラリ</h2>
+<h3 id="%E6%96%AD%E9%9D%A2%E8%A7%A3%E6%9E%90">断面解析</h3>
+<h4 id="%E6%A7%8B%E9%80%A0%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8Blps%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">構造を決めるlpsファイルの書き方</h4>
+<h4 id="%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%81%82%E3%82%8Bcfg%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">有限要素法の設定ファイルであるcfgファイルの書き方</h4>
+<h4 id="2%E6%AC%A1%E5%85%83%E3%82%B9%E3%82%AB%E3%83%A9%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">2次元スカラ有限要素法に必要なファイル</h4>
+<ul>
+<li>Ncore.msh, Ncore.cfg</li>
+</ul>
+<h4 id="%E6%9C%89%E9%99%90%E8%A6%81%E7%B4%A0%E6%B3%95%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">有限要素法の実行ファイル</h4>
+<ul>
+<li><code>Solver/new_2D_SFEM_20210604b/sfem {N}core</code></li>
+</ul>
+<h4 id="%E7%B5%90%E5%90%88%E4%BF%82%E6%95%B0%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">結合係数の実行ファイル</h4>
+<ul>
+<li><code>Solver/new_2D_SFEM_overlap/sfem_overlap single{N}/{N}core couple/{N}core</code></li>
+</ul>
+<h4 id="%E7%AA%81%E3%81%8D%E5%90%88%E3%82%8F%E3%81%9B%E7%B5%90%E5%90%88%E4%BF%82%E6%95%B0%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">突き合わせ結合係数の実行ファイル</h4>
+<ul>
+<li><code>Solver/new_2D_SFEM_overlap_kappa/sfem_overlap single{i}/{N}core single{j}/{N}core couple/{N}core</code></li>
+</ul>
+<h3 id="%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90">伝搬解析</h3>
+<h4 id="%E4%BC%9D%E6%90%AC%E8%A1%8C%E5%88%97m%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B91">伝搬行列Mの求め方1</h4>
+<p>有限要素法から計算した、個別コアモードの伝搬定数と、結合係数から次式の行列Mを構成する。
 $$
-M = 
+M =
 \begin{pmatrix}
-\beta_1 & \kappa_{12} & \cdots & \kappa_{1n}\\
-\kappa_{21} & \beta_2 & \cdots & \kappa_{2n}\\
-\vdots & \vdots & \cdots & \ddots\\
-\kappa_{n1} & \kappa_{n2} & \cdots & \beta_n\\
+\beta_1 &amp; \kappa_{12} &amp; \cdots &amp; \kappa_{1n}\
+\kappa_{21} &amp; \beta_2 &amp; \cdots &amp; \kappa_{2n}\
+\vdots &amp; \vdots &amp; \cdots &amp; \ddots\
+\kappa_{n1} &amp; \kappa_{n2} &amp; \cdots &amp; \beta_n\
 \end{pmatrix}
-$$ 
-#### 基底変換行列Pの求め方
-行列Mを特異値分解すると次式となる。
+$$</p>
+<h4 id="%E5%9F%BA%E5%BA%95%E5%A4%89%E6%8F%9B%E8%A1%8C%E5%88%97p%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B9">基底変換行列Pの求め方</h4>
+<p>行列Mを特異値分解すると次式となる。
 $$
-M = PDP^{\dagger}\\
+M = PDP^{\dagger}\
 P = \begin{pmatrix}
-c_{11} & \cdots & c_{1n}\\
-\vdots & \ddots & \vdots\\
-c_{n1} & \cdots & c_{nn}
-\end{pmatrix}, 
+c_{11} &amp; \cdots &amp; c_{1n}\
+\vdots &amp; \ddots &amp; \vdots\
+c_{n1} &amp; \cdots &amp; c_{nn}
+\end{pmatrix},
 D = \begin{pmatrix}
-\tilde\beta_1 &   & O\\
-  & \ddots &  \\
-O &  &  \tilde\beta_n\\
+\tilde\beta_1 &amp;   &amp; O\
+&amp; \ddots &amp;  \
+O &amp;  &amp;  \tilde\beta_n\
 \end{pmatrix}
-$$ 
-$\dagger$は共役複素転置を表す。このとき、Pが基底変換行列、Dが固有値行列となる。Dは対角成分のみを持つ行列で、その要素はスーパーモードの伝搬定数となる。
-#### 伝搬行列Mの求め方2
-  基底変換行列と固有値行列がわかれば、結合係数$\kappa$を求めずに、突合せ結合係数とスーパーモードの伝搬定数のみからモード結合方程式の行列Mを構成できる。
-#### 伝搬解析用C++プログラムの使い方
-##### 伝搬解析を実行するシェルスクリプト`mpiexec.sh`
-  
-```sh
-#!/bin/sh
+$$
+$\dagger$は共役複素転置を表す。このとき、Pが基底変換行列、Dが固有値行列となる。Dは対角成分のみを持つ行列で、その要素はスーパーモードの伝搬定数となる。</p>
+<h4 id="%E4%BC%9D%E6%90%AC%E8%A1%8C%E5%88%97m%E3%81%AE%E6%B1%82%E3%82%81%E6%96%B92">伝搬行列Mの求め方2</h4>
+<p>基底変換行列と固有値行列がわかれば、結合係数$\kappa$を求めずに、突合せ結合係数とスーパーモードの伝搬定数のみからモード結合方程式の行列Mを構成できる。</p>
+<h4 id="%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E7%94%A8c%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9">伝搬解析用C++プログラムの使い方</h4>
+<h5 id="%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88mpiexecsh">伝搬解析を実行するシェルスクリプト<code>mpiexec.sh</code></h5>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/bin/sh</span>
 mpirun -n {num_proc} -ppn {num_procpernode} -f hostfile {path_to_lib}/Solver/{PManalysis_dirname}/PManalysis_new param.ini {option}
-```
-- {num_proc}: 用いるCPUの数
-- {num_procpernode}: 用いるメモリ[GB]の量
-- {path_to_lib}: 実行ファイルが置かれているライブラリまでのパス．例：`path_to_lib = "/home/konishi/lib"`
-- {PManalysis_dirname}: 伝搬解析に用いるC++ファイルの実行ファイルのディレクトリ名
-- {option}: 伝搬解析の実行ファイルPManalysis_newのオプション．オプション`-ave`を使うと
-
-ファイル例
-```sh
-#!/bin/sh
+</div></code></pre>
+<ul>
+<li>{num_proc}: 用いるCPUの数</li>
+<li>{num_procpernode}: 用いるメモリ[GB]の量</li>
+<li>{path_to_lib}: 実行ファイルが置かれているライブラリまでのパス．例：<code>path_to_lib = &quot;/home/konishi/lib&quot;</code></li>
+<li>{PManalysis_dirname}: 伝搬解析に用いるC++ファイルの実行ファイルのディレクトリ名</li>
+<li>{option}: 伝搬解析の実行ファイルPManalysis_newのオプション．オプション<code>-ave</code>を使うと</li>
+</ul>
+<p>ファイル例</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/bin/sh</span>
 mpirun -n 20 -ppn 10 -f hostfile /home/konishi/lib/Solver/PManalysis_sato_quad_new5_neff/PManalysis_new param.ini -ave
-```
-
-
-##### 伝搬解析を行う計算機を指定する設定ファイル`hostfile`
-
-```sh
-{server_name}
-```
-
-`{server_name}`: 計算機名
-例：hp18, hp20, ts1
-
-ファイル例
-```sh
-hp18
-```
-
-##### 伝搬解析のパラメータを記述した設定ファイル`param.ini`
-```
-[PManalysis_new5]
+</div></code></pre>
+<h5 id="%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%82%92%E8%A1%8C%E3%81%86%E8%A8%88%E7%AE%97%E6%A9%9F%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABhostfile">伝搬解析を行う計算機を指定する設定ファイル<code>hostfile</code></h5>
+<pre class="hljs"><code><div>{server_name}
+</div></code></pre>
+<p><code>{server_name}</code>: 計算機名
+例：hp18, hp20, ts1</p>
+<p>ファイル例</p>
+<pre class="hljs"><code><div>hp18
+</div></code></pre>
+<h5 id="%E4%BC%9D%E6%90%AC%E8%A7%A3%E6%9E%90%E3%81%AE%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%92%E8%A8%98%E8%BF%B0%E3%81%97%E3%81%9F%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABparamini">伝搬解析のパラメータを記述した設定ファイル<code>param.ini</code></h5>
+<pre class="hljs"><code><div>[PManalysis_new5]
 data.modenum:	4
 center_xy[um]:	+0.0	+0.0
 mode0(px,py):	10.0	0.0
@@ -134,87 +524,88 @@ RandomBend(sigma)[/mm]:	0
 TwistRate[rad/m](1.0:PI):	1.0
 RandomTwist(sigma)[rad/m](1.0:PI):	0
 Lc[m]:	0.1
-```
-##### 基底変換行列を格納したファイル`tableU.dat`
-```
-0.500993420914207	0.500529538098675	0.497425018803623	0.501043036223103
+</div></code></pre>
+<h5 id="%E5%9F%BA%E5%BA%95%E5%A4%89%E6%8F%9B%E8%A1%8C%E5%88%97%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtableudat">基底変換行列を格納したファイル<code>tableU.dat</code></h5>
+<pre class="hljs"><code><div>0.500993420914207	0.500529538098675	0.497425018803623	0.501043036223103
 0.695126072491569	0.120723450262004	-0.697971352263144	-0.122725642765954
 -0.122479107994722	0.698092500947157	0.120968690401317	-0.695005254723534
 -0.500803557942577	0.49755692153653	-0.500770324630727	0.50086124662095
-```
-- 突き合わせ結合係数`cij/MSH{i}_MSH0/c12_re` i = 1, ..., Nのファイルを読み込み，$n\times n$の基底変換行列$U$を構成する．
+</div></code></pre>
+<ul>
+<li>突き合わせ結合係数<code>cij/MSH{i}_MSH0/c12_re</code> i = 1, ..., Nのファイルを読み込み，$n\times n$の基底変換行列$U$を構成する．
 $$
-c_i = \begin{pmatrix}c_{i1}\\ \vdots \\ c_{in}\end{pmatrix}, 
+c_i = \begin{pmatrix}c_{i1}\ \vdots \ c_{in}\end{pmatrix},
 U = \begin{pmatrix}c_1 \cdots c_n\end{pmatrix}
-$$
-
-##### スーパーモードの伝搬定数を格納したファイル`tablekx.dat`
-```
-5.865236836628815
+$$</li>
+</ul>
+<h5 id="%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%A2%E3%83%BC%E3%83%89%E3%81%AE%E4%BC%9D%E6%90%AC%E5%AE%9A%E6%95%B0%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtablekxdat">スーパーモードの伝搬定数を格納したファイル<code>tablekx.dat</code></h5>
+<pre class="hljs"><code><div>5.865236836628815
 5.864654482336022
 5.864654481157570
 5.864105535290867
-```
-- スーパーモード (couple) の伝搬定数を大きい順で上から並べたファイルです．
-
-##### スーパーモードの群屈折率を格納したファイル`tableng.dat`
-```
-1.449410803711804
+</div></code></pre>
+<ul>
+<li>スーパーモード (couple) の伝搬定数を大きい順で上から並べたファイルです．</li>
+</ul>
+<h5 id="%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%A2%E3%83%BC%E3%83%89%E3%81%AE%E7%BE%A4%E5%B1%88%E6%8A%98%E7%8E%87%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABtablengdat">スーパーモードの群屈折率を格納したファイル<code>tableng.dat</code></h5>
+<pre class="hljs"><code><div>1.449410803711804
 1.449940829048378
 1.449940828752061
 1.450437689530682
-```
-- `tablekx.dat`の各モードに対応する群屈折率．順番は`tablekx.dat`の各モードに対応する順．
-
-### Tips
-#### 分散曲線とモード数
-- 単一コアあたりに伝搬するモード数を決めるときは、所望のモード数となる構造の条件を分散曲線から求める。
-#### 並列計算の方法
-- Pythonの場合は種々の方法があるが、`multiprocessing`ライブラリを用いている。
-#### よくあるグラフの描画方法
-- GDSの伝搬距離依存性
-- GDSの曲げ半径依存性
-- neffの伝搬距離依存性
-- GDSスロープの伝搬距離依存性
-- GDSスロープの曲げ半径依存性
-- カラーマップ
-
-
-## ライブラリの説明
-### fiber.calc_fiber
-`result = calc_fiber(structure_dict, gif = False, pdf = False, couple = True, single = True, cij = True, kij = True, table = False)`
-
-ステップインデックス型光ファイバの断面解析を行い，結果を格納した辞書`result`を返します．また，新たに`data`ディレクトリを作成し，計算結果ファイルを出力します．
-
-#### 各引数の説明
-`structure_dict`は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．
-
-```python
-structure_dict = {
-    'num_of_core': 4,
-    'core_radius': [4.55, 4.55, 4.55, 4.55],
-    'x_list': [10, 0, -10, 0],
-    'y_list': [0, 10, 0, -10],
-    'coredeltas': [0.35, 0.35, 0.35, 0.35],
-    'wavelength[um]': 1.55
+</div></code></pre>
+<ul>
+<li><code>tablekx.dat</code>の各モードに対応する群屈折率．順番は<code>tablekx.dat</code>の各モードに対応する順．</li>
+</ul>
+<h3 id="tips">Tips</h3>
+<h4 id="%E5%88%86%E6%95%A3%E6%9B%B2%E7%B7%9A%E3%81%A8%E3%83%A2%E3%83%BC%E3%83%89%E6%95%B0">分散曲線とモード数</h4>
+<ul>
+<li>単一コアあたりに伝搬するモード数を決めるときは、所望のモード数となる構造の条件を分散曲線から求める。</li>
+</ul>
+<h4 id="%E4%B8%A6%E5%88%97%E8%A8%88%E7%AE%97%E3%81%AE%E6%96%B9%E6%B3%95">並列計算の方法</h4>
+<ul>
+<li>Pythonの場合は種々の方法があるが、<code>multiprocessing</code>ライブラリを用いている。</li>
+</ul>
+<h4 id="%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E3%82%B0%E3%83%A9%E3%83%95%E3%81%AE%E6%8F%8F%E7%94%BB%E6%96%B9%E6%B3%95">よくあるグラフの描画方法</h4>
+<ul>
+<li>GDSの伝搬距離依存性</li>
+<li>GDSの曲げ半径依存性</li>
+<li>neffの伝搬距離依存性</li>
+<li>GDSスロープの伝搬距離依存性</li>
+<li>GDSスロープの曲げ半径依存性</li>
+<li>カラーマップ</li>
+</ul>
+<h2 id="%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E8%AA%AC%E6%98%8E">ライブラリの説明</h2>
+<h3 id="fibercalcfiber">fiber.calc_fiber</h3>
+<p><code>result = calc_fiber(structure_dict, gif = False, pdf = False, couple = True, single = True, cij = True, kij = True, table = False)</code></p>
+<p>ステップインデックス型光ファイバの断面解析を行い，結果を格納した辞書<code>result</code>を返します．また，新たに<code>data</code>ディレクトリを作成し，計算結果ファイルを出力します．</p>
+<h4 id="%E5%90%84%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E">各引数の説明</h4>
+<p><code>structure_dict</code>は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．</p>
+<pre class="hljs"><code><div>structure_dict = {
+    <span class="hljs-string">'num_of_core'</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-string">'core_radius'</span>: [<span class="hljs-number">4.55</span>, <span class="hljs-number">4.55</span>, <span class="hljs-number">4.55</span>, <span class="hljs-number">4.55</span>],
+    <span class="hljs-string">'x_list'</span>: [<span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-10</span>, <span class="hljs-number">0</span>],
+    <span class="hljs-string">'y_list'</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-10</span>],
+    <span class="hljs-string">'coredeltas'</span>: [<span class="hljs-number">0.35</span>, <span class="hljs-number">0.35</span>, <span class="hljs-number">0.35</span>, <span class="hljs-number">0.35</span>],
+    <span class="hljs-string">'wavelength[um]'</span>: <span class="hljs-number">1.55</span>
 }
-```
-
-- `num_of_core`はコア数を表す整数型 (int) 型のパラメータです．
-- `core_radius`はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
-- `x_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
-- `y_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
-- `coredeltas`はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．
-- `wavelength[um]`は解析波長を表すfloat型のパラメータで，単位はμmです．
-
-#### 出力ファイルの場所
-`data`ディレクトリ内に構造ごとのディレクトリが作成され、出力データが格納されます。
-構造ごとのディレクトリ名は、入力した`structure_dict`から決定されます。具体的には、読み込んだデータから構成した文字列をさらにハッシュ化した文字列がディレクトリ名となります．ハッシュ化に必要なデータは次の4種類です．小数点3桁までが反映されます。小数点4桁目は四捨五入されます。
-
-- コア径
-- x座標
-- y座標
-- コアの比屈折率
+</div></code></pre>
+<ul>
+<li><code>num_of_core</code>はコア数を表す整数型 (int) 型のパラメータです．</li>
+<li><code>core_radius</code>はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>x_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>y_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>coredeltas</code>はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．</li>
+<li><code>wavelength[um]</code>は解析波長を表すfloat型のパラメータで，単位はμmです．</li>
+</ul>
+<h4 id="%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80">出力ファイルの場所</h4>
+<p><code>data</code>ディレクトリ内に構造ごとのディレクトリが作成され、出力データが格納されます。
+構造ごとのディレクトリ名は、入力した<code>structure_dict</code>から決定されます。具体的には、読み込んだデータから構成した文字列をさらにハッシュ化した文字列がディレクトリ名となります．ハッシュ化に必要なデータは次の4種類です．小数点3桁までが反映されます。小数点4桁目は四捨五入されます。</p>
+<ul>
+<li>コア径</li>
+<li>x座標</li>
+<li>y座標</li>
+<li>コアの比屈折率</li>
+</ul>
 <!-- 
 ```python
 # ハッシュ化の関数 lib/python/fiber/binary_search.py
@@ -256,13 +647,10 @@ def generate_hash(gene):
 
     return hashed_key
 ``` -->
-
-ディレクトリ構造は次の通りです。
+<p>ディレクトリ構造は次の通りです。</p>
 <!-- ![alt text](img/image.png) -->
 <details><summary>ディレクトリ構造</summary>
-
-```
-/data/0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04
+<pre class="hljs"><code><div>/data/0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04
 |--wavelength_1550nm
 | |--2core.pdf
 | |--M.dat
@@ -348,170 +736,217 @@ def generate_hash(gene):
 | |--tableU.dat
 | |--tablekx.dat
 | |--tableng.dat
-```
+</div></code></pre>
 </details>
-
-#### 返り値
-`result = calc_fiber()`の返り値`result`は辞書となる。
-```python
-result = {
-    'couple_ng1': 1.449856368659995, 
-    'couple_ng2': 1.449966748736736, 
-    'gds': 184.09415213018656, 
-    'neff_r': ['1.446778327208198', '1.446762495564402'], 
-    'neff_i': ['0.000000000000000e+00', '0.000000000000000e+00'], 
-    'k0_r[rad/um]': ['4.053667940115862', '4.053667940115862'], 
-    'k0_i[rad/um]': ['0.000000000000000e+00', '0.000000000000000e+00'], 
-    'kx_r[rad/um]': ['5.864758921458329', '5.864694745231435'], 
-    'kx_i[rad/um]': ['0.000000000000000e+00', '0.000000000000000e+00'], 
-    'ng_r': ['1.449856368659995', '1.449966748736736'], 
-    'ng_i': ['0.000000000000000e+00', '0.000000000000000e+00'], 
-    'Aeff[um^2]': ['1.693249940482153e+02', '1.653398877788967e+02'], 
-    'single2_beta': 5.864726994285341, 
-    'single2_ng': 1.449910908777932, 
-    'single1_beta': 5.864726993356653, 
-    'single1_ng': 1.449910908242495, 
-    'kappa12': 3.1979750129e-05, 
-    'kappa21': 3.1979474425e-05,
-    'dirpath': '0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04'
+<h4 id="%E8%BF%94%E3%82%8A%E5%80%A4">返り値</h4>
+<p><code>result = calc_fiber()</code>の返り値<code>result</code>は辞書となる。</p>
+<pre class="hljs"><code><div>result = {
+    <span class="hljs-string">'couple_ng1'</span>: <span class="hljs-number">1.449856368659995</span>, 
+    <span class="hljs-string">'couple_ng2'</span>: <span class="hljs-number">1.449966748736736</span>, 
+    <span class="hljs-string">'gds'</span>: <span class="hljs-number">184.09415213018656</span>, 
+    <span class="hljs-string">'neff_r'</span>: [<span class="hljs-string">'1.446778327208198'</span>, <span class="hljs-string">'1.446762495564402'</span>], 
+    <span class="hljs-string">'neff_i'</span>: [<span class="hljs-string">'0.000000000000000e+00'</span>, <span class="hljs-string">'0.000000000000000e+00'</span>], 
+    <span class="hljs-string">'k0_r[rad/um]'</span>: [<span class="hljs-string">'4.053667940115862'</span>, <span class="hljs-string">'4.053667940115862'</span>], 
+    <span class="hljs-string">'k0_i[rad/um]'</span>: [<span class="hljs-string">'0.000000000000000e+00'</span>, <span class="hljs-string">'0.000000000000000e+00'</span>], 
+    <span class="hljs-string">'kx_r[rad/um]'</span>: [<span class="hljs-string">'5.864758921458329'</span>, <span class="hljs-string">'5.864694745231435'</span>], 
+    <span class="hljs-string">'kx_i[rad/um]'</span>: [<span class="hljs-string">'0.000000000000000e+00'</span>, <span class="hljs-string">'0.000000000000000e+00'</span>], 
+    <span class="hljs-string">'ng_r'</span>: [<span class="hljs-string">'1.449856368659995'</span>, <span class="hljs-string">'1.449966748736736'</span>], 
+    <span class="hljs-string">'ng_i'</span>: [<span class="hljs-string">'0.000000000000000e+00'</span>, <span class="hljs-string">'0.000000000000000e+00'</span>], 
+    <span class="hljs-string">'Aeff[um^2]'</span>: [<span class="hljs-string">'1.693249940482153e+02'</span>, <span class="hljs-string">'1.653398877788967e+02'</span>], 
+    <span class="hljs-string">'single2_beta'</span>: <span class="hljs-number">5.864726994285341</span>, 
+    <span class="hljs-string">'single2_ng'</span>: <span class="hljs-number">1.449910908777932</span>, 
+    <span class="hljs-string">'single1_beta'</span>: <span class="hljs-number">5.864726993356653</span>, 
+    <span class="hljs-string">'single1_ng'</span>: <span class="hljs-number">1.449910908242495</span>, 
+    <span class="hljs-string">'kappa12'</span>: <span class="hljs-number">3.1979750129e-05</span>, 
+    <span class="hljs-string">'kappa21'</span>: <span class="hljs-number">3.1979474425e-05</span>,
+    <span class="hljs-string">'dirpath'</span>: <span class="hljs-string">'0/83d49d4fed84ef258826ea821ae6814a8ef6cf5535010145c4ed8ed3710cfd04'</span>
     }
-```
-
-- `couple_ng{i}`: i番目のスーパーモードの群屈折率
-- `gds`: 群遅延広がり (Group Delay Spread: GDS)。スーパーモードの群遅延時間$n_g$の分散で定義される。
-  $$
-  \mathrm{GDS} = \sqrt{\dfrac{1}{N}\sum_{i=1}^{N}(\tau_i - \tau_{\mathrm{ave}})^2},\quad \tau_i = L\dfrac{n_{gi}}{c},\quad \tau_{\mathrm{ave}} = \dfrac{1}{N}\sum_{i=1}^{N}\tau_i
-  $$
-- `neff_r`: スーパーモードの実効屈折率の実部を格納した配列
-- `neff_i`: スーパーモードの実効屈折率の虚部を格納した配列
-- `k0_r[rad/um]`: 自由空間波数の実部を格納した配列
-- `k0_i[rad/um]`: 自由空間波数の虚部を格納した配列
-- `kx_r[rad/um]`: スーパーモードの伝搬定数の実部を格納した配列
-- `kx_i[rad/um]`: スーパーモードの伝搬定数の虚部を格納した配列
-- `ng_r`: スーパーモードの群屈折率の実部を格納した配列
-- `ng_i`: スーパーモードの群屈折率の虚部を格納した配列
-- `Aeff[um^2]`: 実効断面積を格納した配列
-- `single{i}_beta`: i番目の個別コアモードの伝搬定数
-- `single{i}_ng`: i番目の個別コアモードの群屈折率
-- `kappa{i}{j}`: コアi, j間の結合係数
-- `dirpath`: 解析データを格納する`data`ディレクトリ内のパス。ディレクトリ名はハッシュ値である。
-
-### pmpy.calc_gds
-`calc_gds(structure_dict, gds_params_dict, num_loop, num_cpu = 1, num_mem = 1, filename_dict = {}, prefilename = 'prefile', PManalysis_dirname = "PManalysis_sato_quad_new5_neff", output_dirname = 'gds_result', graph = False)`
-光ファイバの伝搬解析シミュレーションを行い、結果をファイルに出力します。関数自体の出力は`None`です。
-#### 各引数の説明
-- structure_dict
-  - `structure_dict`は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．
-
-  ```python
-  structure_dict = {
-      'num_of_core': 4,
-      'core_radius': [4.55, 4.55, 4.55, 4.55],
-      'x_list': [10, 0, -10, 0],
-      'y_list': [0, 10, 0, -10],
-      'coredeltas': [0.35, 0.35, 0.35, 0.35],
-      'wavelength[um]': 1.55
+</div></code></pre>
+<ul>
+<li><code>couple_ng{i}</code>: i番目のスーパーモードの群屈折率</li>
+<li><code>gds</code>: 群遅延広がり (Group Delay Spread: GDS)。スーパーモードの群遅延時間$n_g$の分散で定義される。
+$$
+\mathrm{GDS} = \sqrt{\dfrac{1}{N}\sum_{i=1}^{N}(\tau_i - \tau_{\mathrm{ave}})^2},\quad \tau_i = L\dfrac{n_{gi}}{c},\quad \tau_{\mathrm{ave}} = \dfrac{1}{N}\sum_{i=1}^{N}\tau_i
+$$</li>
+<li><code>neff_r</code>: スーパーモードの実効屈折率の実部を格納した配列</li>
+<li><code>neff_i</code>: スーパーモードの実効屈折率の虚部を格納した配列</li>
+<li><code>k0_r[rad/um]</code>: 自由空間波数の実部を格納した配列</li>
+<li><code>k0_i[rad/um]</code>: 自由空間波数の虚部を格納した配列</li>
+<li><code>kx_r[rad/um]</code>: スーパーモードの伝搬定数の実部を格納した配列</li>
+<li><code>kx_i[rad/um]</code>: スーパーモードの伝搬定数の虚部を格納した配列</li>
+<li><code>ng_r</code>: スーパーモードの群屈折率の実部を格納した配列</li>
+<li><code>ng_i</code>: スーパーモードの群屈折率の虚部を格納した配列</li>
+<li><code>Aeff[um^2]</code>: 実効断面積を格納した配列</li>
+<li><code>single{i}_beta</code>: i番目の個別コアモードの伝搬定数</li>
+<li><code>single{i}_ng</code>: i番目の個別コアモードの群屈折率</li>
+<li><code>kappa{i}{j}</code>: コアi, j間の結合係数</li>
+<li><code>dirpath</code>: 解析データを格納する<code>data</code>ディレクトリ内のパス。ディレクトリ名はハッシュ値である。</li>
+</ul>
+<h3 id="pmpycalcgds">pmpy.calc_gds</h3>
+<p><code>calc_gds(structure_dict, gds_params_dict, num_loop, num_cpu = 1, num_mem = 1, filename_dict = {}, prefilename = 'prefile', PManalysis_dirname = &quot;PManalysis_sato_quad_new5_neff&quot;, output_dirname = 'gds_result', graph = False)</code>
+光ファイバの伝搬解析シミュレーションを行い、結果をファイルに出力します。関数自体の出力は<code>None</code>です。</p>
+<h4 id="%E5%90%84%E5%BC%95%E6%95%B0%E3%81%AE%E8%AA%AC%E6%98%8E">各引数の説明</h4>
+<ul>
+<li>
+<p>structure_dict</p>
+<ul>
+<li><code>structure_dict</code>は，解析したいステップインデックス型光ファイバの構造を記述した辞書です．以下の例のように，6つのキーを指定します．</li>
+</ul>
+<pre class="hljs"><code><div>structure_dict = {
+    <span class="hljs-string">'num_of_core'</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-string">'core_radius'</span>: [<span class="hljs-number">4.55</span>, <span class="hljs-number">4.55</span>, <span class="hljs-number">4.55</span>, <span class="hljs-number">4.55</span>],
+    <span class="hljs-string">'x_list'</span>: [<span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-10</span>, <span class="hljs-number">0</span>],
+    <span class="hljs-string">'y_list'</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-10</span>],
+    <span class="hljs-string">'coredeltas'</span>: [<span class="hljs-number">0.35</span>, <span class="hljs-number">0.35</span>, <span class="hljs-number">0.35</span>, <span class="hljs-number">0.35</span>],
+    <span class="hljs-string">'wavelength[um]'</span>: <span class="hljs-number">1.55</span>
+}
+</div></code></pre>
+<ul>
+<li><code>num_of_core</code>はコア数を表す整数型 (int) 型のパラメータです．</li>
+<li><code>core_radius</code>はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>x_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>y_list</code>はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．</li>
+<li><code>coredeltas</code>はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．</li>
+<li><code>wavelength[um]</code>は解析波長を表すfloat型のパラメータで，単位はμmです．</li>
+</ul>
+</li>
+<li>
+<p>gds_params_dict</p>
+<ul>
+<li><code>gds_params_dict</code>は、伝搬解析のパラメータを記述した辞書です。以下の例のように，8つのキーを指定します．</li>
+</ul>
+<pre class="hljs"><code><div>gds_params_dict = {
+                <span class="hljs-string">'distance[m]'</span>: <span class="hljs-number">1000</span>,
+                <span class="hljs-string">'dz[m]'</span>: <span class="hljs-number">0.001</span>,
+                <span class="hljs-string">'Rbend[mm]'</span>: <span class="hljs-number">150</span>,
+                <span class="hljs-string">'RandomBend(sigma)[/mm]'</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">'TwistRate[rad/m](1.0:PI)'</span>: <span class="hljs-number">1.0</span>,
+                <span class="hljs-string">'RandomTwist(sigma)[rad/m](1.0:PI)'</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">'Lc[m]'</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-string">'loop'</span>: <span class="hljs-number">1</span>
+            }
+</div></code></pre>
+<ul>
+<li><code>distance[m]</code>: 伝搬距離を表す整数型 (int) のパラメータです．単位はmです．</li>
+<li><code>dz[m]</code>: セグメント長を表すfloat型のパラメータです．単位はmです．</li>
+<li><code>Rbend[mm]</code>: 曲げ半径を表す整数型 (int) のパラメータです．単位はmmです．</li>
+<li><code>RandomBend(sigma)[/mm]</code>: ランダムな曲げを表すfloat型のパラメータです．単位はmです．</li>
+<li><code>TwistRate[rad/m](1.0:PI)</code>: ファイバの一定のねじれを表すfloat型のパラメータです．単位はrad/mです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．</li>
+<li><code>RandomTwist(sigma)[rad/m](1.0:PI)</code>: ファイバのランダムなねじれを表すfloat型のパラメータです．単位はmです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．</li>
+<li><code>Lc[m]</code>: ランダム位相誤差のランダム性を決定する相関長と呼ばれるfloat型のパラメータです．単位はmです．Lcは小さいほどランダム性が大きくなります．</li>
+<li><code>loop</code>: GDSの計算回数を表す整数型 (int) のパラメータです．</li>
+</ul>
+</li>
+<li>
+<p>num_loop</p>
+<ul>
+<li>GDSの計算回数を指定するパラメータ。一般に、伝搬解析では正規分布に従うランダムな摂動が加わるため、計算回数を増やして平均を取ることで母集団の平均に近づけることができる。</li>
+</ul>
+</li>
+<li>
+<p>num_cpu = 1</p>
+<ul>
+<li>並列計算に使用するCPUの数。計算機の最大CPU数を超えないように設定する。num_cpuを増やすと、計算時間が短縮される。</li>
+</ul>
+</li>
+<li>
+<p>num_mem = 1</p>
+<ul>
+<li>計算に使用するメモリ量[GB]。計算機の最大メモリ量を超えないように設定する。</li>
+</ul>
+</li>
+<li>
+<p>filename_dict = {}</p>
+<ul>
+<li>伝搬解析に必要な設定ファイルの名前をカスタムするパラメータ。デフォルトでは、次の名前となっている。
+<ul>
+<li><code>mpiexec.sh</code></li>
+<li><code>hostname</code></li>
+<li><code>param.ini</code></li>
+<li><code>tableU.dat</code></li>
+<li><code>tablekx.dat</code></li>
+<li><code>tableng.dat</code></li>
+</ul>
+</li>
+<li>入力ファイル名がデフォルトと異なる場合には、<code>filename_dict</code>を次のように記述する。</li>
+</ul>
+<pre class="hljs"><code><div>filename_dict = {
+      <span class="hljs-string">'mpiexec.sh'</span>: <span class="hljs-string">'mpiexec_new.sh'</span>,
+      <span class="hljs-string">'hostfile'</span>: <span class="hljs-string">'hostfile_new'</span>,
+      <span class="hljs-string">'param.ini'</span>: <span class="hljs-string">'param_new.ini'</span>,
+      <span class="hljs-string">'tableU.dat'</span>: <span class="hljs-string">'tableU_new.dat'</span>,
+      <span class="hljs-string">'tableng.dat'</span>: <span class="hljs-string">'tableng_new.dat'</span>,
+      <span class="hljs-string">'tablekx.dat'</span>: <span class="hljs-string">'tablekx_new.dat'</span>
   }
-  ```
-
-  - `num_of_core`はコア数を表す整数型 (int) 型のパラメータです．
-  - `core_radius`はコア径を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
-  - `x_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
-  - `y_list`はコアのx座標を表すリスト型のパラメータで，リストの要素はfloat型です．単位はμmです．リストの長さはコア数と同じです．
-  - `coredeltas`はクラッドに対するコアの比屈折率を表すリスト型のパラメータで，リストの要素はfloat型です．単位は%です．リストの長さはコア数と同じです．
-  - `wavelength[um]`は解析波長を表すfloat型のパラメータで，単位はμmです．
-- gds_params_dict
-  - `gds_params_dict`は、伝搬解析のパラメータを記述した辞書です。以下の例のように，8つのキーを指定します．
-  ```python
-  gds_params_dict = {
-                  'distance[m]': 1000,
-                  'dz[m]': 0.001,
-                  'Rbend[mm]': 150,
-                  'RandomBend(sigma)[/mm]': 0,
-                  'TwistRate[rad/m](1.0:PI)': 1.0,
-                  'RandomTwist(sigma)[rad/m](1.0:PI)': 0,
-                  'Lc[m]': 0.1,
-                  'loop': 1
-              }
-  ```
-  - `distance[m]`: 伝搬距離を表す整数型 (int) のパラメータです．単位はmです．
-  - `dz[m]`: セグメント長を表すfloat型のパラメータです．単位はmです．
-  - `Rbend[mm]`: 曲げ半径を表す整数型 (int) のパラメータです．単位はmmです．
-  - `RandomBend(sigma)[/mm]`: ランダムな曲げを表すfloat型のパラメータです．単位はmです．
-  - `TwistRate[rad/m](1.0:PI)`: ファイバの一定のねじれを表すfloat型のパラメータです．単位はrad/mです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．
-  - `RandomTwist(sigma)[rad/m](1.0:PI)`: ファイバのランダムなねじれを表すfloat型のパラメータです．単位はmです．入力した数値に対して円周率πが乗算されることに注意してください．例えば，1.0を入力すると，一定のねじれは1.0πとなります．
-  - `Lc[m]`: ランダム位相誤差のランダム性を決定する相関長と呼ばれるfloat型のパラメータです．単位はmです．Lcは小さいほどランダム性が大きくなります．
-  - `loop`: GDSの計算回数を表す整数型 (int) のパラメータです．
-- num_loop
-  - GDSの計算回数を指定するパラメータ。一般に、伝搬解析では正規分布に従うランダムな摂動が加わるため、計算回数を増やして平均を取ることで母集団の平均に近づけることができる。
-- num_cpu = 1
-  - 並列計算に使用するCPUの数。計算機の最大CPU数を超えないように設定する。num_cpuを増やすと、計算時間が短縮される。
-- num_mem = 1
-  - 計算に使用するメモリ量[GB]。計算機の最大メモリ量を超えないように設定する。
-- filename_dict = {}
-  - 伝搬解析に必要な設定ファイルの名前をカスタムするパラメータ。デフォルトでは、次の名前となっている。
-    - `mpiexec.sh`
-    - `hostname`
-    - `param.ini`
-    - `tableU.dat`
-    - `tablekx.dat`
-    - `tableng.dat`
-  - 入力ファイル名がデフォルトと異なる場合には、`filename_dict`を次のように記述する。
-  ```python
-  filename_dict = {
-        'mpiexec.sh': 'mpiexec_new.sh',
-        'hostfile': 'hostfile_new',
-        'param.ini': 'param_new.ini',
-        'tableU.dat': 'tableU_new.dat',
-        'tableng.dat': 'tableng_new.dat',
-        'tablekx.dat': 'tablekx_new.dat'
-    }
-  ```
-  ここでは、既存のファイル名に`_new`を付けたファイルを読み込むことを想定した。
-- prefilename = 'prefile'
-  - 結果を出力するディレクトリ名を設定。デフォルトでは`gds_params_dict`のデータを使って、`prefilename = f'prefile_rndBend{gds_params_dict["RandomBend"]}_rndTwist{gds_params_dict["RandomTwist"]}'`が設定される。
-- PManalysis_dirname = "PManalysis_sato_quad_new5_neff"
-  - 伝搬解析に用いる実行ファイルのディレクトリ名を指定する。サポート中のディレクトリ名は`/home/konishi/lib/Solver/`から確認できる。2024年6月4日現在、次のディレクトリ名がサポートされている。
-  ```python
-  [
-      'PManalysis_indivisual', 
-      'PManalysis_sato_quad_new5',
-      'PManalysis_sato_quad_new5_neff',
-      'PManalysis_indivisual_ip_im', 
-      'PManalysis_couple_ip_im', 
-      'PManalysis_couple_ip_im_neff_record',
-      'PManalysis_couple_ip_im_neff',
-      'PManalysis_couple_neff',
-      'PManalysis_indivisual_neff',
-      'PManalysis_konishi_indivisual',
-      'PManalysis_konishi_couple',
-      'PManalysis_konishi_indivisual_new'
-  ]
-  ``` 
-  - デフォルトでは、`PManalysis_sato_quad_new5_neff`が用いられており、主な仕様は次のとおりである。
-    - 相関長によるランダム位相誤差を考慮
-    - ランダム位相誤差の周波数依存性は考慮しない
-    - ランダム位相誤差はスーパーモードに乗算
-    - 実効屈折率の伝搬距離依存性データを出力
-    - GDSの伝搬距離依存性データを出力
-    - 群遅延時間の伝搬距離依存性データを出力
-    - GDSスロープの伝搬距離依存性データを出力
-- output_dirname = 'gds_result'
-  - 出力ディレクトリの名前を設定する。デフォルトでは`gds_result`になる。
-- graph = False
-  - グラフを出力する場合はTrue、しない場合はFalseに設定する。デフォルトではFalseに設定されている。
-#### 出力ファイルの場所
-- 伝搬計算の結果を格納しているディレクトリは次のようになっている。
-`/data/構造特有のハッシュ値/wavelength_{波長}nm/gds_result/prefilename/TwistRate{ツイスト率}/pd{伝搬距離}_dz{セグメント長}_rbend{曲げ半径}_Lc{相関長}`
-例：`~/32ed8ee40e9fbbc510855d1a9ba715be6df6fb5252c6316d1b918c0a0c8abd2c/wavelength_1550nm/gds_result/_prefile_sato_quad_new5_neff_tr1.0_Lc0/TwistRate1.0/pd1000_dz0.001_rbend10000_Lc0`
-#### 返り値
-`calc_gds`の返り値は`None`である。計算した結果はすべてファイルに保存される。
-
-### fiber.calc_rbend_gds
-
-
-### fiber.generate_hash(gene_dict)
-
+</div></code></pre>
+<p>ここでは、既存のファイル名に<code>_new</code>を付けたファイルを読み込むことを想定した。</p>
+</li>
+<li>
+<p>prefilename = 'prefile'</p>
+<ul>
+<li>結果を出力するディレクトリ名を設定。デフォルトでは<code>gds_params_dict</code>のデータを使って、<code>prefilename = f'prefile_rndBend{gds_params_dict[&quot;RandomBend&quot;]}_rndTwist{gds_params_dict[&quot;RandomTwist&quot;]}'</code>が設定される。</li>
+</ul>
+</li>
+<li>
+<p>PManalysis_dirname = &quot;PManalysis_sato_quad_new5_neff&quot;</p>
+<ul>
+<li>伝搬解析に用いる実行ファイルのディレクトリ名を指定する。サポート中のディレクトリ名は<code>/home/konishi/lib/Solver/</code>から確認できる。2024年6月4日現在、次のディレクトリ名がサポートされている。</li>
+</ul>
+<pre class="hljs"><code><div>[
+    <span class="hljs-string">'PManalysis_indivisual'</span>, 
+    <span class="hljs-string">'PManalysis_sato_quad_new5'</span>,
+    <span class="hljs-string">'PManalysis_sato_quad_new5_neff'</span>,
+    <span class="hljs-string">'PManalysis_indivisual_ip_im'</span>, 
+    <span class="hljs-string">'PManalysis_couple_ip_im'</span>, 
+    <span class="hljs-string">'PManalysis_couple_ip_im_neff_record'</span>,
+    <span class="hljs-string">'PManalysis_couple_ip_im_neff'</span>,
+    <span class="hljs-string">'PManalysis_couple_neff'</span>,
+    <span class="hljs-string">'PManalysis_indivisual_neff'</span>,
+    <span class="hljs-string">'PManalysis_konishi_indivisual'</span>,
+    <span class="hljs-string">'PManalysis_konishi_couple'</span>,
+    <span class="hljs-string">'PManalysis_konishi_indivisual_new'</span>
+]
+</div></code></pre>
+<ul>
+<li>デフォルトでは、<code>PManalysis_sato_quad_new5_neff</code>が用いられており、主な仕様は次のとおりである。
+<ul>
+<li>相関長によるランダム位相誤差を考慮</li>
+<li>ランダム位相誤差の周波数依存性は考慮しない</li>
+<li>ランダム位相誤差はスーパーモードに乗算</li>
+<li>実効屈折率の伝搬距離依存性データを出力</li>
+<li>GDSの伝搬距離依存性データを出力</li>
+<li>群遅延時間の伝搬距離依存性データを出力</li>
+<li>GDSスロープの伝搬距離依存性データを出力</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>output_dirname = 'gds_result'</p>
+<ul>
+<li>出力ディレクトリの名前を設定する。デフォルトでは<code>gds_result</code>になる。</li>
+</ul>
+</li>
+<li>
+<p>graph = False</p>
+<ul>
+<li>グラフを出力する場合はTrue、しない場合はFalseに設定する。デフォルトではFalseに設定されている。</li>
+</ul>
+</li>
+</ul>
+<h4 id="%E5%87%BA%E5%8A%9B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E6%89%80">出力ファイルの場所</h4>
+<ul>
+<li>伝搬計算の結果を格納しているディレクトリは次のようになっている。
+<code>/data/構造特有のハッシュ値/wavelength_{波長}nm/gds_result/prefilename/TwistRate{ツイスト率}/pd{伝搬距離}_dz{セグメント長}_rbend{曲げ半径}_Lc{相関長}</code>
+例：<code>~/32ed8ee40e9fbbc510855d1a9ba715be6df6fb5252c6316d1b918c0a0c8abd2c/wavelength_1550nm/gds_result/_prefile_sato_quad_new5_neff_tr1.0_Lc0/TwistRate1.0/pd1000_dz0.001_rbend10000_Lc0</code></li>
+</ul>
+<h4 id="%E8%BF%94%E3%82%8A%E5%80%A4">返り値</h4>
+<p><code>calc_gds</code>の返り値は<code>None</code>である。計算した結果はすべてファイルに保存される。</p>
+<h3 id="fibercalcrbendgds">fiber.calc_rbend_gds</h3>
+<h3 id="fibergeneratehashgenedict">fiber.generate_hash(gene_dict)</h3>
 <!-- In-product release notes styles.  Do not modify without also modifying regex in gulpfile.common.js -->
-<a id="scroll-to-top" role="button" aria-label="scroll to top" onclick="scroll(0,0)"><span class="icon"></span></a>
+<p><a id="scroll-to-top" role="button" aria-label="scroll to top" onclick="scroll(0,0)"><span class="icon"></span></a></p>
 <link rel="stylesheet" type="text/css" href="inproduct_releasenotes.css"/>
+
+</body>
+</html>
